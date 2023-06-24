@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pl" class="theme1">
+  <head>
+    <title>Angielskie Słówka</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="SoulRvr" />
+    <meta name="description" content="Strona do nauki angielskich słówek" />
+    <meta name="keywords" content="angielski, słówka, fiszki, nauka" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/fontello.css" />
+    <link rel="stylesheet" href="siteStyle.css" />
+    <link rel="shortcut icon" href="icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=PT+Serif:ital,wght@1,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <div id="strona">
+      <header>
+        <div id="logo">Angielskie Słówka</div>
+        <nav>
+          <div class="przyciskiPM" id="kategoria" style="display: none">
+            Kategoria
+          </div>
+          <div class="przyciskiPM" id="przyciskMinus">
+            <i class="icon-minus"></i>
+          </div>
+          <div id="formularz">
+            <form>
+              <input
+                type="text"
+                min="1"
+                max="99"
+                id="formLiczba"
+                maxlength="2"
+                name="liczba"
+                value="10"
+                onfocus="this.value=''"
+              />
+            </form>
+          </div>
+          <div class="przyciskiPM" id="przyciskPlus">
+            <i class="icon-plus"></i>
+          </div>
+          <div id="ang_pl">ANG - PL</div>
+          <div id="przyciskZestaw">ZESTAW</div>
+          <div class="switchContainer">
+            <h2>THEME</h2>
+            <input
+              oninput="setTheme(this.value)"
+              class="switch"
+              type="range"
+              aria-label="theme"
+              min="1"
+              max="3"
+              value="1"
+            />
+          </div>
+        </nav>
+      </header>
+      <main>
+        <div id="wybranyZestaw" title="kategoria">
+          Wybrany zestaw: wszystkie słówka
+        </div>
+        <div id="losowanie">LOSOWANIE</div>
+        <div id="zestawyLista"></div>
+        <div id="zestawSlowka"></div>
+        <div id="plansza">
+          <div id="pasek_postepu">
+            <div id="pasek"></div>
+            <div id="pasekTekst">PROGRESS</div>
+          </div>
+          <div class="karta">START</div>
+          <div id="pod_karta">
+            <div id="cofnij"><i class="icon-left-small"></i></div>
+            <div class="przyciski_karty" id="znam">
+              <i class="icon-ok"></i>znam
+            </div>
+            <div class="przyciski_karty" id="nie_znam">
+              <i class="icon-cancel"></i>nie znam
+            </div>
+          </div>
+        </div>
+        <div id="podsumowanie">
+          <div id="top">Podsumowanie</div>
+          <div id="lista"></div>
+          <div id="licznikZnam"></div>
+        </div>
+      </main>
+      <footer>Copyright &copy 2023</footer>
+    </div>
+    <div id="baza_slowek" title="wszystkie słówka">
+		<div title="owoce i warzywa">
+			cherry - wiśnia
+			pear - gruszka
+			pineapple - ananas
+			strawberry - truskawka
+			grapes - winogrona
+			coconut - kokos
+			watermelon - arbuz
+			peach - brzoskwinia
+			currant - porzeczka
+			plum - śliwka
+			gooseberry - agrest
+			berry - jagoda
+			wild strawberry - poziomka
+			raspberry - malina
+			peanut - orzech ziemny
+			parsley - pietruszka
+			cucumber - ogórek
+			lettuce - sałata
+			cabbage - kapusta
+			beet - burak
+			leek - por
+			garlic - czosnek
+			radish - rzodkiewka
+			turnip - rzepa
+			cauliflower - kalafior
+			pumpkin - dynia
+			pea - groch
+		</div>
+
+		<div title="nazwy miesięcy">
+			january - styczeń
+			february - luty
+			march - marzec
+			april - kwiecień
+			may - maj
+			june - czerwiec
+			july - lipiec
+			august - sierpień
+			september - wrzesień
+			october - październik
+			november - listopad
+			december - grudzień
+		</div>
+
+		<div title="programowanie">
+			meaningful - znaczący
+			ensure - zapewnić
+			comma - przecinek ,
+			refinement - udoskonalenie
+			bear in mind - mieć na uwadze
+			trigger - wyzwalać
+			query - zapytanie
+			deployment - zastosowanie, wdrożenie
+			overcome issue - rozwiązać problem
+			colon - dwukropek :
+			stack - stos
+			agile - zwinny
+			append - dodać
+			accomplish - ukończyć, zrealizować
+			execute - wykonać, zrealizować
+			statement - instrukcja warunkowa
+			alter - zmieniać, modyfikować
+			semicolon - średnik ;
+			conditional - warunek, warunkowy
+			parentheses - nawias okrągły ()
+			left angle bracket - nawias ostry &lt;
+			evaluation - ocena
+			fetch - pobrać, przynieść, aportować
+			dash - myślnik &#8208;
+			guideline - wytyczna
+			occurrence - wystąpienie
+			parsing - analiza składniowa
+			relevant - istotny
+			row - wiersz
+			terms - warunki
+			mandatory - obowiązkowy
+			vendor - dostawca
+			chart - wykres
+			common - wspólny, powszechny, zwykły
+			bunch - wiązka
+			node - węzeł
+			underscore - podkreślać, uwypuklać
+			via - przez, poprzez
+			outcome - wynik
+			utility - narzędzie
+			emphasis - nacisk, podkreślenie
+			accordingly - odpowiednio, zgodnie
+			scope - zakres
+		</div>
+
+		<div title="programowanie 2">
+			adjacent - sąsiadujący, przyległy
+			ancestor - przodek
+			batch - partia, grupa, seria
+			repository - magazyn, składnica
+			decipher - odszyfrować
+			overlook - przeoczyć
+			raw data - surowe dane
+			placeholder - symbol zastępczy
+			queue - kolejka, stać w kolejce
+			derived - pochodny, wywodzący się
+			fork - widelec, rozwidlenie
+			enact - wcielić w życie
+			entity - istota, jednostka
+			throughout - poprzez
+			bulk - hurtowy, masowy
+			minify - pomniejszać
+			preserve - utrzymywać, ochraniać, zabezpieczać
+			factor - czynnik
+			artificial - sztuczny
+			wrapper - obwoluta
+			origin - pochodzenie
+			root - korzeń, pierwiastek
+			merge - łączyć, scalać
+			sideway - boczny
+			embedded - zagnieżdżony
+			fraction - ułamek
+			intrinsic - wewnętrzny
+			redundant - zbędny, niepotrzebny
+			ruling out - wykluczając
+			inheritance - dziedziczenie
+			enumerate - wyliczać
+			indentation - wcięcie, wgłębienie
+			commit - popełniać
+			prompt - podpowiedź, sugestia
+			quotation - cudzysłów &#34;&#34;
+			equatin - równanie
+			property - właściwość, nieruchomość
+			exclamation mark - wykrzyknik !
+			asterisk - gwiazdka &#42;
+			hyphen - łącznik, kreska &#8208;
+		</div>
+
+		<div title="różne">
+			vinegar - ocet
+			kerosene - nafta oczyszczona
+			candid - szczery
+			clumsy - niezdarny
+			sewage - ścieki
+			cereal - zboże
+			vapor - para
+			consistent - spójny
+			in principle - zasadniczo
+			volatile - lotny, zmienny
+			bespoke - zrobiony na zamówienie
+			although - chociaż
+			abysmal - okropny, fatalny
+			conjunction - połączenie, spójnik
+			harsh - szorstki, ostry
+			merely - zaledwie, jedynie
+			ubiquitous - powszechny, wszechobecny
+			forecast - prognoza
+			imperfectness - niedoskonałość
+			wisdom - mądrość
+			diverge - różnić się, odchodzić
+			coupling - sprzęganie
+			fallback - awaria, spadać, cofać się
+			necklace - naszyjnik
+			pendant - wisiorek
+			precious - cenny, szlachetny
+			venue - lokal
+			violin - skrzypce
+			harp - harfa
+			conductor - dyrygent
+			sketch - szkic
+			juggler - żongler
+			funfair - wesołe miasteczko
+			audience - publiczność
+			spectators - widzowie
+		</div>
+
+		<div title="nowe">
+			endure - znieść, przetrwać
+			attain - osiągać
+			divine - boski
+			rigid - sztywny, twardy
+			obscure - niejasny, ciemny
+			newlyweds - nowożeńcy
+			mobster - gangster
+			sums up - podsumowując
+			devour - pożerać
+			acrid - gryzący, cierpki
+			fodder - pasza, karma
+			frail - wątły, słaby
+			harvest - zbiór, żniwa
+			sibling - rodzeństwo
+			bewilder - dezorientować, oszałamiać
+			tumble - upadek
+			seemingly - pozornie
+			remorse - żal, wyrzuty sumienia
+			idle - bezczynny, jałowy
+			although - chociaż
+			glamor - przepych, urok
+			bribe - łapówka, przekupić
+			poverty - ubóstwo, bieda
+			wise - mądry
+		</div>
+	
+		<div title="trudne słówka">
+			culprit - winowajca, sprawca
+			conceited - zarozumiały
+			insolent - bezczelny
+			reluctant - niechętny
+			anxious - niespokojny
+			admission - wstęp, dopuszczenie
+			oath - przysięga
+			defer - odraczać, odkładać
+			discourse - rozprawiać
+			hubris - pycha
+			wallow - tarzać się
+			principle - zasada, reguła
+			obnoxious - obrzydliwy, nieprzyjemny
+			whack - walnięcie
+			burrow - nora, ryć
+			delight - rozkosz, zachwyt
+			maggot - czerw, robak
+			assess - oceniać, oszacować
+			abundant - obfity, bogaty
+			invoke - odwołać się
+			goading - prowokować, poganiać
+		</div>
+
+		<div title="najnowsze">
+			despise - gardzić
+			ache - boleć
+			convenient - wygodny
+			parse - analizować
+			plethora - nadmiar, bogactwo
+			grasp - chwycić, zrozumieć
+			concise - zwięzły, krótki
+			primitive - prymitywny, pierwotny
+			instance - instancja, przykład
+			indication - wskazanie, oznaczenie
+			widespread - rozpowszechniony
+			persistent - trwały, uporczywy
+			tedious - żmudny, nudny
+			shallow - płytki
+			chunk - kawałek, klocek
+			remainder - reszta
+			assignment - zadanie
+			immutability - niezmienność
+			recap - podsumowanie
+			ellipsis - wielokropek
+			compound - mieszanina, złożony
+			equivalent - równowartość
+			omit - pomijać
+			within - w zasięgu, wewnątrz
+			ternary - potrójny
+			consecutive - kolejny
+			mellow - łagodny
+			sublime - wzniosły
+			counterpart - odpowiednik
+		</div>
+	</div>
+  </body>
+</html>

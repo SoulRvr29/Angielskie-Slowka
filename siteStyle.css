@@ -1,0 +1,611 @@
+.theme1 {
+  --background-body: #2b2b2b;
+  --background-site: #141414;
+  --background-texture: url(denim-medium.png);
+  --background-brd: 2px solid #585048;
+  --background-brd2: 2px solid #aa9482;
+  --text-light: #d8cbc1;
+  --text-medium: #d3a595;
+  --text-shd: 2px 2px 1px rgba(0, 0, 0, 0.4);
+  --logo: #d8cbc1;
+  --button-bkg: #3a485a;
+  --button-bkg-hover: #18588d;
+  --button-brd: #aa9482;
+  --button-brd-hover: #ffefea;
+  --highlight: #ffffff;
+  --progress-bar-bkg: #4a4f58;
+  --progress-bar: #3a9000;
+  --card-txt-pl: #443930;
+  --card-txt-ang: #c9c3bf;
+  --card-txt-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  --card-pl-bkg: #948d89;
+  --card-pl-brd: #574f4a;
+  --card-ang-bkg: #504843;
+  --card-ang-brd: rgb(153, 144, 135);
+  --known-bkg: #0a416e;
+  --known-brd: #5680a1;
+  --unknown-bkg: #803025;
+  --unknown-brd: #a34236;
+  --word-pl: #2f491d;
+  --word-ang: #74351e;
+  --word-dash: #000000;
+  --word-pl: #88b16d;
+  --word-ang: #d66a6a;
+  --word-dash: #c5c5c5;
+}
+.theme2 {
+  --background-body: #666666;
+  --background-site: #4d4d4d;
+  --background-texture: url(denim-light.png);
+  --background-brd: 2px solid #5c5c5c;
+  --background-brd2: 2px solid #e6dccd;
+  --text-light: #ffffff;
+  --text-medium: #ffffff;
+  --text-shd: 2px 2px 2px rgba(0, 0, 0, 0.1);
+  --logo: #e9e9e9;
+  --button-bkg: #4a6f7e;
+  --button-bkg-hover: #618c9e;
+  --button-brd: #2d3b41;
+  --button-brd-hover: #c5e0ec;
+  --highlight: #ffffff;
+  --progress-bar-bkg: #414141;
+  --progress-bar: #bbbbbb;
+  --card-txt-pl: #424242;
+  --card-txt-ang: #d8d8d8;
+  --card-txt-shadow: 2px 2px 1px rgba(0, 0, 0, 0.2);
+  --card-pl-bkg: #aaa9a7;
+  --card-pl-brd: #494744;
+  --card-ang-bkg: #494744;
+  --card-ang-brd: #b4aea4;
+  --known-bkg: #4a6f7e;
+  --known-brd: #2d3b41;
+  --unknown-bkg: #883939;
+  --unknown-brd: #551b1b;
+  --word-pl: #2f491d;
+  --word-ang: #74351e;
+  --word-dash: #000000;
+}
+.theme3 {
+  --background-body: #141414;
+  --background-site: #141414;
+  --background-texture: url(denim-dark.png);
+  --background-brd: 2px solid #573f35;
+  --background-brd2: 2px solid #d55629;
+  --text-light: #ffe2d8;
+  --text-medium: #d3a595;
+  --text-shd: 2px 2px 1px rgba(0, 0, 0, 0.4);
+  --logo: #d55629;
+  --button-bkg: #b53609;
+  --button-bkg-hover: #c54619;
+  --button-brd: #e47f5a;
+  --button-brd-hover: #ffe2d8;
+  --highlight: #ffffff;
+  --progress-bar-bkg: #8c0000;
+  --progress-bar: #3a9000;
+  --card-txt-pl: #e7f5de;
+  --card-txt-ang: #f7ddd4;
+  --card-txt-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  --card-pl-bkg: #307900;
+  --card-pl-brd: #71b95b;
+  --card-ang-bkg: #b53609;
+  --card-ang-brd: #e47f5a;
+  --known-bkg: #3a9000;
+  --known-brd: #87cf56;
+  --unknown-bkg: #8c0000;
+  --unknown-brd: #cc4b4b;
+  --word-pl: #6ead41;
+  --word-ang: #d64444;
+  --word-dash: #e0c3b6;
+}
+
+body {
+  background-color: var(--background-body);
+  color: var(--text-light);
+  font-size: 1.25rem;
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  text-shadow: var(--text-shd);
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+::-webkit-scrollbar {
+  width: 0.6rem;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--button-bkg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--button-brd);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+hr {
+  border: 1px solid var(--button-bkg);
+}
+
+#strona {
+  position: relative;
+  max-width: 62.5rem;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: var(--background-site);
+  background-image: var(--background-texture);
+  border-left: var(--background-brd);
+  border-right: var(--background-brd);
+  margin: 0 auto;
+}
+
+/************************* LOGO **************************/
+#logo {
+  font-size: min(10vw, 45px);
+  color: var(--logo);
+  font-weight: 700;
+  border-bottom: var(--background-brd2);
+  line-height: 160%;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.3rem;
+}
+
+/************************* MENU GŁÓWNE **************************/
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  height: 2.25rem;
+  gap: 0.5rem;
+}
+.przyciskiPM {
+  font-size: 1.25rem;
+  line-height: 160%;
+  width: 2.125rem;
+  height: 2.125rem;
+  border: 2px solid var(--button-brd);
+  border-radius: 50%;
+}
+.przyciskiPM:hover {
+  border: 2px solid var(--button-brd-hover);
+  cursor: pointer;
+}
+#divLiczbySlowek {
+  transition: all 0.3s;
+  width: 2.8rem;
+}
+#divLiczbySlowek:hover {
+  cursor: pointer;
+}
+#formLiczba {
+  width: 2.25rem;
+  height: 2.25rem;
+  background-color: rgba(0, 0, 0, 0);
+  color: var(--text-light);
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1.5rem;
+  outline: none;
+}
+#formLiczba:hover {
+  cursor: pointer;
+  color: var(--highlight);
+}
+#formLiczba:focus {
+  border: 2px solid var(--text-light);
+  border-radius: 0.5rem;
+  background-color: var(--border-dark);
+  color: var(--highlight);
+}
+#ang_pl,
+#przyciskZestaw {
+  display: flex;
+  align-items: center;
+  height: 1.875rem;
+  color: var(--text-light);
+  background-color: var(--button-bkg);
+  border: 2px solid var(--button-brd);
+  border-radius: 0.4rem;
+  padding: 0 0.5rem;
+  text-overflow: ellipsis;
+}
+#ang_pl:hover,
+#przyciskZestaw:hover {
+  background-color: var(--button-bkg-hover);
+  border: 2px solid var(--button-brd-hover);
+  cursor: pointer;
+}
+.switchContainer h2 {
+  font-size: 0.6rem;
+  letter-spacing: 0.1rem;
+  line-height: 1.4;
+}
+.switch {
+  appearance: none;
+  background-color: var(--button-bkg);
+  border: 2px solid var(--button-brd);
+  border-radius: 10rem;
+  width: 3rem;
+  padding: 0.19rem;
+}
+.switch::-webkit-slider-thumb {
+  appearance: none;
+  border-radius: 5px;
+  width: 1rem;
+  height: 0.6rem;
+  background-color: var(--button-brd);
+}
+.switch::-webkit-slider-thumb:hover {
+  background-color: var(--button-brd-hover);
+  cursor: pointer;
+}
+
+/************************* MENU ZESTAWY **************************/
+#zestawyLista {
+  border-top: var(--background-brd2);
+  border-bottom: var(--background-brd2);
+  position: relative;
+  max-width: 19rem;
+  margin: 5.1vh auto;
+  max-height: 20vh;
+  overflow: auto;
+}
+#zestawSlowka {
+  border-top: var(--background-brd2);
+  border-bottom: var(--background-brd2);
+  margin: 3vh auto;
+  max-width: 17.5rem;
+  max-height: 33vh;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: left;
+  padding: 0.6rem 1.2rem;
+  padding-top: 0;
+  line-height: 150%;
+  overflow: auto;
+  -webkit-user-select: text;
+  user-select: text;
+}
+#wybranyZestaw {
+  display: inline-block;
+  color: var(--text-medium);
+  font-size: 1rem;
+  margin: 2vh auto 2vh auto;
+  border-bottom: var(--border-dark);
+  padding: 3px 10px;
+}
+.zestaw {
+  position: relative;
+  width: 15.5rem;
+  height: 40px;
+  border: 1px solid var(--text-medium);
+  background-color: var(--button-bkg);
+  border-radius: 10px;
+  padding: 5px;
+  margin: 0.6rem;
+  line-height: 125%;
+}
+.zestaw:hover {
+  color: var(--highlight);
+  cursor: pointer;
+  box-shadow: 0px 0px 0.6rem var(--button-brd);
+}
+#liczbaSlowek {
+  position: sticky;
+  top: 0;
+  left: 0;
+  color: var(--text-medium);
+  background-color: var(--button-bkg);
+  text-align: center;
+}
+
+/************************* LOSOWANIE **************************/
+#losowanie {
+  height: 2.5rem;
+  width: 12.5rem;
+  font-size: 1.63rem;
+  color: var(--text-light);
+  line-height: 135%;
+  background-color: var(--button-bkg);
+  border: 2px solid var(--button-brd);
+  border-radius: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  transition: all 0.2s;
+}
+#losowanie:hover {
+  background-color: var(--button-bkg-hover);
+  border: 2px solid var(--button-brd-hover);
+  cursor: pointer;
+  scale: 107%;
+}
+
+/************************* PLANSZA **************************/
+#plansza {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.8rem;
+  max-width: 22rem;
+  height: auto;
+  margin-top: 4vh;
+  margin-left: auto;
+  margin-right: auto;
+  perspective: 31rem;
+}
+#pasek_postepu {
+  position: relative;
+  height: 0.9rem;
+  width: 22rem;
+  background-color: var(--progress-bar-bkg);
+}
+#pasek {
+  height: 0.9rem;
+  width: 0%;
+  background-color: var(--progress-bar);
+  transition: all 0.5s;
+}
+#pasekTekst {
+  position: absolute;
+  top: 0;
+  font-size: 0.625rem;
+  line-height: 125%;
+  letter-spacing: 0.5rem;
+  height: 0.9rem;
+  width: 22rem;
+}
+.karta {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.2rem;
+  font-weight: 700;
+  width: 22rem;
+  height: 9.3rem;
+  padding: 0 1.5rem;
+  color: var(--card-txt-pl);
+  text-shadow: var(--card-txt-shadow);
+  background-color: var(--card-pl-bkg);
+  background-image: url(fabric10.png);
+  border: 4px solid var(--card-pl-brd);
+  border-radius: 1.25rem;
+  line-height: 120%;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.2);
+}
+.karta:hover {
+  cursor: pointer;
+}
+.karta_anim {
+  animation-name: cardRotate;
+  animation-duration: 0.5s;
+  animation-direction: alternate;
+  animation-fill-mode: forwards;
+}
+@keyframes cardRotate {
+  0% {
+    filter: brightness(100%);
+    transform: rotateX(0deg);
+  }
+  50% {
+    filter: brightness(80%);
+    transform: rotateX(-90deg);
+    text-orientation: sideways;
+  }
+  51% {
+    filter: brightness(80%);
+    transform: rotateX(90deg);
+    text-orientation: sideways;
+  }
+  100% {
+    filter: brightness(100%);
+    transform: rotateX(0deg);
+  }
+}
+
+/*********************** POD KARTĄ ************************/
+#pod_karta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+  max-width: 22rem;
+}
+#cofnij {
+  height: 2.2rem;
+  width: 2.2rem;
+  line-height: 150%;
+  border: 2px solid var(--unknown-bkg);
+  border-radius: 50%;
+  transition: all 0.2s;
+  text-shadow: var(--text-shd);
+}
+#znam,
+#nie_znam {
+  height: 40px;
+  width: 130px;
+  background-color: var(--known-bkg);
+  line-height: 170%;
+  border: 2px solid var(--known-brd);
+  border-radius: 20px;
+  transition: all 0.2s;
+  padding-right: 0.5rem;
+}
+#nie_znam {
+  background-color: var(--unknown-bkg);
+  border: 2px solid var(--unknown-brd);
+}
+#nie_znam:hover {
+  background-color: var(--unknown-bkg);
+  border: 2px solid var(--highlight);
+  cursor: pointer;
+}
+#znam:hover {
+  background-color: var(--known-bkg);
+  border: 2px solid var(--highlight);
+  cursor: pointer;
+}
+#cofnij:hover {
+  border: 2px solid var(--highlight);
+  cursor: pointer;
+}
+
+/************************* PODSUMOWANIE **************************/
+#podsumowanie {
+  width: 22rem;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: 600;
+}
+#top {
+  height: 2.5rem;
+  max-width: 22rem;
+  margin-top: 3vh;
+  color: var(--logo);
+  border-bottom: 2px solid var(--button-brd);
+}
+#licznikZnam {
+  height: 2.5rem;
+  max-width: 22rem;
+  color: var(--logo);
+  border-top: 2px solid var(--button-brd);
+}
+#lista {
+  max-width: 22rem;
+  max-height: 45vh;
+  font-size: 1rem;
+  text-align: left;
+  padding: 0.6rem 1.2rem;
+  line-height: 150%;
+  overflow: auto;
+  -webkit-user-select: text;
+  user-select: text;
+}
+#baza_slowek {
+  display: none;
+}
+
+/************************* FOOTER **************************/
+footer {
+  position: sticky;
+  top: 100%;
+  width: 100%;
+  text-align: center;
+  height: 2.4rem;
+  border-top: 2px solid var(--button-brd);
+  border-bottom: 2px solid var(--button-brd);
+  background-color: var(--button-bkg);
+  line-height: 1.6;
+}
+
+/************************** MEDIA QUERY **********************************/
+@media screen and (min-width: 800px) {
+  #zestawyLista {
+    position: absolute;
+    margin: 0;
+    left: 10px;
+    top: 9.5rem;
+    min-height: 75vh;
+  }
+  #zestawSlowka {
+    position: absolute;
+    margin: 0;
+    right: 10px;
+    top: 9.5rem;
+    width: 18.75rem;
+    max-height: 75vh;
+    font-size: 0.9rem;
+  }
+}
+@media screen and (max-width: 460px) {
+  nav {
+    font-size: 0.9rem;
+    line-height: 150%;
+  }
+  #ang_pl,
+  #przyciskZestaw {
+    padding: 3px;
+  }
+  #ang_pl {
+    line-height: 1;
+  }
+  #losowanie {
+    height: 1.95rem;
+    width: 9rem;
+    font-size: 1.1rem;
+    line-height: 150%;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+  }
+}
+@media screen and (max-width: 400px) {
+  .karta {
+    font-size: 2rem;
+    width: 18rem;
+    height: 8rem;
+  }
+  #pasek_postepu,
+  #pasekTekst,
+  #lista,
+  #top {
+    width: 18rem;
+  }
+  #pod_karta {
+    max-width: 18rem;
+  }
+
+  #nie_znam {
+    font-size: 16px;
+    height: 32px;
+    width: 110px;
+    line-height: 160%;
+  }
+
+  #znam {
+    font-size: 18px;
+    height: 30px;
+    width: 90px;
+    padding-right: 10px;
+    background-color: var(--known-bkg);
+    line-height: 130%;
+    margin-right: 5px;
+  }
+  #cofnij {
+    height: 30px;
+    width: 30px;
+    margin-right: 3px;
+    margin-top: 0;
+    line-height: 125%;
+  }
+  #podsumowanie,
+  #top {
+    max-width: 16rem;
+  }
+}
+@media screen and (max-width: 350px) {
+  .karta {
+    font-size: 1.7rem;
+    width: 16rem;
+    height: 7.5rem;
+  }
+  #pasek_postepu,
+  #pasekTekst,
+  #lista,
+  #top {
+    width: 16rem;
+  }
+  nav {
+    font-size: 0.7rem;
+    font-weight: 700;
+    gap: 0.3rem;
+  }
+  #formLiczba {
+    font-size: 1.2rem;
+  }
+}
