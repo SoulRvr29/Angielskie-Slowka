@@ -18,8 +18,11 @@ $(document).ready(function () {
 
   let kolor = []; // lista kolorów
 
-  let strona_karty_dom = false; // domyślna strona karty  true-pl  false-ang
-  let strona_karty_akt = strona_karty_dom; // aktualna strona karty
+  let strona_karty_dom = localStorage.getItem("ang-pl"); // domyślna strona karty 
+  if(strona_karty_dom == 'pl-ang') $("#ang_pl").text("PL - ANG");
+  else $("#ang_pl").text("ANG - PL");
+  let strona_karty_akt = strona_karty_dom; // aktualna strona karty true-pl  false-ang
+
   let karta_blokada = false; // blokada obrotu karty
 
   let znam; // zapamiętane ostatnie wciśnięcie przycisku znam lub nie_znam
@@ -85,12 +88,14 @@ $(document).ready(function () {
 
   $("#ang_pl").click(function () {
     //przycisk ang - pl
-    if (strona_karty_dom == false) {
-      strona_karty_dom = true;
+    if (strona_karty_dom == "ang-pl") {
+      strona_karty_dom = "pl-ang";
       $("#ang_pl").text("PL - ANG");
+      localStorage.setItem("ang-pl", strona_karty_dom);
     } else {
-      strona_karty_dom = false;
+      strona_karty_dom = "ang-pl";
       $("#ang_pl").text("ANG - PL");
+      localStorage.setItem("ang-pl", strona_karty_dom);
     }
   });
 
@@ -340,7 +345,7 @@ $(document).ready(function () {
 
   ////////////////////// OBRACANIE KARTY ///////////////////////////
   function kartaObrot() {
-    if (strona_karty_akt == false) {
+    if (strona_karty_akt == 'ang-pl') {
       setTimeout(function () {
         $(".karta").text(los_slowkaAng[aktualnyNr]);
         $(".karta").css({
@@ -348,7 +353,7 @@ $(document).ready(function () {
           border: "4px solid var(--card-ang-brd)",
           color: "var(--card-txt-ang)",
         });
-        strona_karty_akt = true;
+        strona_karty_akt = 'pl-ang';
       }, 250);
     } else {
       setTimeout(function () {
@@ -358,7 +363,7 @@ $(document).ready(function () {
           border: "4px solid var(--card-pl-brd)",
           color: "var(--card-txt-pl)",
         });
-        strona_karty_akt = false;
+        strona_karty_akt = 'ang-pl';
       }, 250);
     }
   }
@@ -401,7 +406,7 @@ $(document).ready(function () {
     setTimeout(function () {
       $(".karta").css("text-shadow", "var(--card-txt-shadow)");
       $(".karta").css("transition", "none");
-      if (strona_karty_akt == true)
+      if (strona_karty_akt == 'pl-ang')
         $(".karta").css("color", "var(--card-txt-ang)");
       else $(".karta").css("color", "var(--card-txt-pl)");
     }, 250);
@@ -415,7 +420,8 @@ $(document).ready(function () {
       licznikPost = licznikPost - 100 / formLiczba.value;
       $("#pasek").css("width", licznikPost + "%");
     }
-    strona_karty_akt = !strona_karty_akt;
+    // strona_karty_akt = !strona_karty_akt;
+    strona_karty_akt == 'ang-pl' ? strona_karty_akt = 'pl-ang' : strona_karty_akt = 'ang-pl';
     kartaObrot();
     cofnijLock = true;
   }
