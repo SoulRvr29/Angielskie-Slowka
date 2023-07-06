@@ -3,10 +3,10 @@ Strona do nauki angielskich słówek metodą fiszek.
 
 # Screenshots
 
-![](./screen-mobile.jpg)
+![](screens/screen-mobile.jpg)
 
-![](./lista-zestawów-desktop.jpg)
+![](screens/lista-zestawów-desktop.jpg)
 
-![](./kolorystyka.jpg)
+![](screens/kolorystyka.jpg)
 
-![](./opis.jpg)
+![](screens/opis.jpg)
