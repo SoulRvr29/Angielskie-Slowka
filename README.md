@@ -10,7 +10,7 @@ Link do strony: [https://soulrvr29.github.io/Angielskie-Slowka/](https://soulrvr
 ## Ekran listy słówek w trybie desktop.
 ![](screens/lista-zestawów-desktop.jpeg)
 
-## Wersje kolorystyczne.
+## Trzy wersje kolorystyczne.
 ![](screens/kolorystyka.jpg)
 
 ## Funkcjonalność strony.
