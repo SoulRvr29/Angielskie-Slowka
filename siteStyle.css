@@ -249,7 +249,7 @@ nav {
   background-color: var(--button-brd-hover);
   cursor: pointer;
 }
-#opis-btn{
+#opis-btn {
   opacity: 0.6;
   position: absolute;
   display: flex;
@@ -479,33 +479,52 @@ nav {
   border: 2px solid var(--highlight);
   cursor: pointer;
 }
-#opis-slowka{
+#opis-slowka {
+  position: relative;
   display: none;
   max-width: 22rem;
+  width: 90%;
   margin: 0 auto;
   margin-top: 1.5rem;
 }
-#opis-slowka h2{
+#opis-slowka h2 {
   height: 0.9rem;
   background-color: var(--button-bkg);
   font-size: 0.625rem;
   line-height: 125%;
   letter-spacing: 0.3rem;
 }
-#opis{
+#opis {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: left;
-  font-size: 1rem;
-  padding: 1rem;
+  font-size: 0.8rem;
+  padding: 0.75rem;
   background-image: url(fabric10.png);
   border: 3px solid var(--button-bkg);
   line-height: 140%;
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.4);
 }
-#opis b{
+/* #opis b {
   text-transform: uppercase;
+} */
+#audio-btn {
+  display: none;
+  position: absolute;
+  top: 0rem;
+  right: 0rem;
+  font-size: 2.5rem;
+  background-color: var(--button-bkg);
+  height: 2rem;
+  width: 2rem;
+  border: 1px solid var(--button-brd);
+  line-height: 0.75;
+}
+#audio-btn:hover {
+  background-color: var(--button-bkg-hover);
+  border: 1px solid var(--button-brd-hover);
+  cursor: pointer;
 }
 /************************* PODSUMOWANIE **************************/
 #podsumowanie {

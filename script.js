@@ -18,8 +18,8 @@ $(document).ready(function () {
 
   let kolor = []; // lista kolorów
 
-  let strona_karty_dom = localStorage.getItem("ang-pl"); // domyślna strona karty 
-  if(strona_karty_dom == 'pl-ang') $("#ang_pl").text("PL - ANG");
+  let strona_karty_dom = localStorage.getItem("ang-pl"); // domyślna strona karty
+  if (strona_karty_dom == "pl-ang") $("#ang_pl").text("PL - ANG");
   else $("#ang_pl").text("ANG - PL");
   let strona_karty_akt = strona_karty_dom; // aktualna strona karty true-pl  false-ang
 
@@ -172,7 +172,7 @@ $(document).ready(function () {
 
   $("#przyciskZestaw").click(function () {
     // przycisk zestaw
-    $('#opis-slowka').css({display: 'none'});
+    $("#opis-slowka").css({ display: "none" });
     $("#zestawyLista").slideToggle();
     $("#plansza").slideUp();
     $("#podsumowanie").slideUp();
@@ -193,28 +193,28 @@ $(document).ready(function () {
 
   let opisBtn = false;
 
-  console.log(localStorage.getItem("opis-btn"));
-if (localStorage.getItem("opis-btn") == 'true'){
-  $('#opis-btn').css({opacity: '1'});
-  opisBtn = true;
-} else {
-  $('#opis-btn').css({opacity: '0.6'});
-  $('#opis-slowka').css({display: 'none'});
-  opisBtn = false;
-}
+  // console.log(localStorage.getItem("opis-btn"));
+  if (localStorage.getItem("opis-btn") == "true") {
+    $("#opis-btn").css({ opacity: "1" });
+    opisBtn = true;
+  } else {
+    $("#opis-btn").css({ opacity: "0.6" });
+    $("#opis-slowka").css({ display: "none" });
+    opisBtn = false;
+  }
 
-  $('#opis-btn').click(function (){
-    if(opisBtn == false){
-      $('#opis-btn').css({opacity: '1'});
+  $("#opis-btn").click(function () {
+    if (opisBtn == false) {
+      $("#opis-btn").css({ opacity: "1" });
       opisBtn = true;
       localStorage.setItem("opis-btn", true);
     } else {
-      $('#opis-btn').css({opacity: '0.6'});
-      $('#opis-slowka').css({display: 'none'});
+      $("#opis-btn").css({ opacity: "0.6" });
+      $("#opis-slowka").css({ display: "none" });
       opisBtn = false;
       localStorage.setItem("opis-btn", false);
     }
-  })
+  });
   //////////////////// WYBÓR ZESTAWU /////////////////////////
   function wyborZestawu(x) {
     $(".zestaw").css("backgroundColor", "var(--button-bkg)"); // reset tła przycisku
@@ -333,7 +333,7 @@ if (localStorage.getItem("opis-btn") == 'true'){
 
   ////////////////// LOSOWANIE SŁÓWEK ////////////////////////
   function losujSlowka() {
-    $('#opis-slowka').css({display: 'none'});
+    $("#opis-slowka").css({ display: "none" });
     let nr = 0;
     let losNr = 0;
     slowkaNr = formLiczba.value;
@@ -371,7 +371,7 @@ if (localStorage.getItem("opis-btn") == 'true'){
 
   ////////////////////// OBRACANIE KARTY ///////////////////////////
   function kartaObrot() {
-    if (strona_karty_akt == 'ang-pl') {
+    if (strona_karty_akt == "ang-pl") {
       setTimeout(function () {
         $(".karta").text(los_slowkaAng[aktualnyNr]);
         opisBtn == true && apiDownload(los_slowkaAng[aktualnyNr]);
@@ -380,7 +380,7 @@ if (localStorage.getItem("opis-btn") == 'true'){
           border: "4px solid var(--card-ang-brd)",
           color: "var(--card-txt-ang)",
         });
-        strona_karty_akt = 'pl-ang';
+        strona_karty_akt = "pl-ang";
       }, 250);
     } else {
       setTimeout(function () {
@@ -390,7 +390,7 @@ if (localStorage.getItem("opis-btn") == 'true'){
           border: "4px solid var(--card-pl-brd)",
           color: "var(--card-txt-pl)",
         });
-        strona_karty_akt = 'ang-pl';
+        strona_karty_akt = "ang-pl";
       }, 250);
     }
   }
@@ -433,7 +433,7 @@ if (localStorage.getItem("opis-btn") == 'true'){
     setTimeout(function () {
       $(".karta").css("text-shadow", "var(--card-txt-shadow)");
       $(".karta").css("transition", "none");
-      if (strona_karty_akt == 'pl-ang')
+      if (strona_karty_akt == "pl-ang")
         $(".karta").css("color", "var(--card-txt-ang)");
       else $(".karta").css("color", "var(--card-txt-pl)");
     }, 250);
@@ -448,7 +448,9 @@ if (localStorage.getItem("opis-btn") == 'true'){
       $("#pasek").css("width", licznikPost + "%");
     }
     // strona_karty_akt = !strona_karty_akt;
-    strona_karty_akt == 'ang-pl' ? strona_karty_akt = 'pl-ang' : strona_karty_akt = 'ang-pl';
+    strona_karty_akt == "ang-pl"
+      ? (strona_karty_akt = "pl-ang")
+      : (strona_karty_akt = "ang-pl");
     kartaObrot();
     cofnijLock = true;
   }
@@ -461,7 +463,7 @@ if (localStorage.getItem("opis-btn") == 'true'){
 
   ///////////////////////////  KONIEC  ///////////////////////////
   function koniec() {
-    $('#opis-slowka').css({display: 'none'});
+    $("#opis-slowka").css({ display: "none" });
     $("#pasek").css("width", "100%");
     $(".karta").text("KONIEC");
     $("#plansza").delay(1000).slideUp(500);
@@ -534,30 +536,52 @@ if (localStorage.getItem("opis-btn") == 'true'){
       nrZnane = 0;
     }
   }
+  ///////////////////////  ANG WORDS API  //////////////////////////
+  let sound = null;
 
   const link = "https://api.dictionaryapi.dev/api/v2/entries/en/";
-    const apiDownload = (slowo) => {
-      fetch(link + slowo)
-        .then((response) => {
-          if (response.ok) {
-            $('#opis-slowka').css({display: 'block'});
-            $('#opis').css({display: 'block'});
-            $('#opis-slowka h2').text('DESCRIPTION');
-            return response.json();
-          } else {
-            $('#opis-slowka h2').text('NO DESCRIPTION');
-            $('#opis').css({display: 'none'});
-          }
-        })
-        .then((data) => {
-          $('#opis').html(`<b>${slowo}:</b> ${data[0].meanings[0].definitions[0].definition}`);
-          console.log(data);
-        })
-        // .catch((err) => {
-        //   alert("Something went wrong!", err);
-        // });
-    };
+  const apiDownload = (slowo) => {
+    fetch(link + slowo)
+      .then((response) => {
+        if (response.ok) {
+          $("#opis-slowka").css({ display: "block" });
+          $("#opis").css({ display: "block" });
+          $("#opis-slowka h2").text("DESCRIPTION");
+          return response.json();
+        } else {
+          $("#opis-slowka h2").text("NO DESCRIPTION");
+          $("#opis").css({ display: "none" });
+          $("#audio-btn").css({ display: "none" });
+        }
+      })
+      .then((data) => {
+        $("#opis").html(
+          `<b>Meaning: </b>${data[0].meanings[0].definitions[0].definition}`
+        );
+        if (data[0].meanings[0].synonyms[0] != undefined) {
+          $("#opis").append("<hr><b>Synonyms: </b>");
+          data[0].meanings[0].synonyms.forEach((item) =>
+            $("#opis").append(`${item}, `)
+          );
+        }
+        if (data[0].phonetics[0].audio != "") {
+          sound = new Audio(data[0].phonetics[0].audio);
+          $("#audio-btn").css({ display: "block" });
+        } else {
+          $("#audio-btn").css({ display: "none" });
+        }
+        console.log(data);
+      });
+    // .catch((err) => {
+    //   alert("Something went wrong!", err);
+    // });
+  };
+
+  $("#audio-btn").click(function () {
+    sound.play();
+  });
 });
+
 ///////////////////////  KOLORYSTYKA STRONY  //////////////////////////
 let themeActual = localStorage.getItem("ang-pl-site");
 
@@ -577,5 +601,3 @@ function setTheme(themeValue) {
   localStorage.setItem("ang-pl-site", themeValue);
 }
 //////////////////////////////////////////////////////////////////////////
-
-    
