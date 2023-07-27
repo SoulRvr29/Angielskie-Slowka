@@ -250,13 +250,13 @@ nav {
   cursor: pointer;
 }
 #opis-btn {
-  opacity: 0.6;
+  opacity: 0.5;
   position: absolute;
   display: flex;
   align-items: center;
   right: 1rem;
   top: 3rem;
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   color: var(--text-light);
   background-color: var(--button-bkg);
   border: 2px solid var(--button-brd);

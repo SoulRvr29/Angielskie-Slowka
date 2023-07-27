@@ -564,6 +564,9 @@ $(document).ready(function () {
             $("#opis").append(`${item}, `)
           );
         }
+        if (data[0].meanings[0].definitions[0].example != undefined) {
+          $("#opis").append(`<hr><b>Example: </b>${data[0].meanings[0].definitions[0].example}`);
+        }
         if (data[0].phonetics[0].audio != "") {
           sound = new Audio(data[0].phonetics[0].audio);
           $("#audio-btn").css({ display: "block" });
