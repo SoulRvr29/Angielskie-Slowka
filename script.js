@@ -4,6 +4,16 @@ $(document).ready(function () {
     $("#formLiczba").blur();
   });
 
+  let zapisaneSlowka = localStorage.getItem("zapisane slowka");
+  if (zapisaneSlowka == null || zapisaneSlowka == "") {
+    localStorage.setItem("zapisane slowka", JSON.stringify([]));
+    $("#baza_slowek").append(
+      `<div id="zapisane" title="zapisane słówka"> </div>`
+    );
+  } else {
+    dodajZapisaneDoHTML(zapisaneSlowka);
+  }
+
   document.querySelector(".switch").value = themeActual;
 
   let slowkaAng = []; // lista wszystkich ang słówek
@@ -44,7 +54,10 @@ $(document).ready(function () {
   generujPrzyciskiZestaw();
   formLiczba.value = localStorage.getItem("liczba slowek");
   formWidth(formLiczba.value);
-  //////////////// WYKRYWANIE KLIKNIĘĆ ///////////////////////
+
+  ////////////////////////////////////////////////////////////////
+  ////////////////   WYKRYWANIE KLIKNIĘĆ   ///////////////////////
+  ////////////////////////////////////////////////////////////////
   $("#losowanie").click(function () {
     //przycisk losowanie
     licznikPost = 0;
@@ -56,8 +69,7 @@ $(document).ready(function () {
     cofnijLock = true;
     policzSlowka(); // liczenie wszystkich par słówek
     przypiszSlowka();
-    sprawdzZnane();
-    // console.log(slowkaAng);
+    // sprawdzZnane();
     losujSlowka();
     $("#zestawSlowka").slideUp(200);
     $("#zestawyLista").slideUp();
@@ -193,7 +205,6 @@ $(document).ready(function () {
 
   let opisBtn = false;
 
-  // console.log(localStorage.getItem("opis-btn"));
   if (localStorage.getItem("opis-btn") == "true") {
     $("#opis-btn").css({ opacity: "1" });
     opisBtn = true;
@@ -215,26 +226,38 @@ $(document).ready(function () {
       localStorage.setItem("opis-btn", false);
     }
   });
+  ////////////////////////////////////////////////////////////
   //////////////////// WYBÓR ZESTAWU /////////////////////////
+  ////////////////////////////////////////////////////////////
   function wyborZestawu(x) {
     $(".zestaw").css("backgroundColor", "var(--button-bkg)"); // reset tła przycisku
+    $(".zestaw[title |= 'zapisane słówka']").css(
+      "backgroundColor",
+      "var(--unknown-bkg)"
+    ); // reset tła zapisane słówka
 
     divSlowek = $('#baza_slowek div[title="' + x + '"]');
     if (x == "wszystkie słówka") divSlowek = $("#baza_slowek");
-
     $(".zestaw[title |= '" + x + "']").css(
       "backgroundColor",
       "var(--button-bkg-hover)"
-    ); // jasne tło
-    // $('#zestawInfo').remove();
-    // $(".zestaw_pack [title |= '"+ x +"']").after('<div id="zestawInfo"><i class="icon-down-small"></i></div>');
+    );
+
+    if (x == "zapisane słówka") {
+      $(".zestaw[title |= 'zapisane słówka']").css(
+        "backgroundColor",
+        "var(--unknown-brd)"
+      );
+    }
 
     policzSlowka();
     formWidth(formLiczba.value);
     $("#wybranyZestaw").text("Zestaw: " + x);
   }
 
+  ///////////////////////////////////////////////////////////////////////
   //////////////// GENEROWANIE PRZYCISKÓW ZESTAWÓW //////////////////////
+  ///////////////////////////////////////////////////////////////////////
   function generujPrzyciskiZestaw() {
     let licznik = 1;
     let tytulZestawu = "";
@@ -265,7 +288,9 @@ $(document).ready(function () {
     }
   }
 
+  //////////////////////////////////////////////////////////////
   /////////////// PRZYCISK ROZWIJANIA ZESTAWU //////////////////
+  //////////////////////////////////////////////////////////////
   function przyciskRozwin() {
     slowkaNr = 0;
     aktualnyNr = 0; // reset
@@ -293,14 +318,18 @@ $(document).ready(function () {
     }
   }
 
+  //////////////////////////////////////////////////////////////
   //////////////////// ROZMIAR FORMULARZA //////////////////////
+  //////////////////////////////////////////////////////////////
   function formWidth(x) {
     if (x > 9) $("#formLiczba").css({ width: "36px", margin: "0px" });
     else $("#formLiczba").css({ width: "22px", margin: "7px" });
     if (x == "") formLiczba.value = 1;
   }
 
+  /////////////////////////////////////////////////////////////
   //////////////////// PRZYPISANIE SŁÓWEK /////////////////////
+  /////////////////////////////////////////////////////////////
   function przypiszSlowka() {
     let znakNr = 0;
     let slowkaAll = $(divSlowek).text(); // pobranie wszystkich słówek z diva
@@ -318,6 +347,7 @@ $(document).ready(function () {
         slowkaAng[slowkaNr] += slowkaAll[znakNr];
         znakNr++;
       }
+
       // sprawdzZnane(slowkaAng[slowkaNr]);
       ///////////////////// PL ////////////////////////
       slowkaPl[slowkaNr] = "";
@@ -331,7 +361,9 @@ $(document).ready(function () {
     }
   }
 
+  ////////////////////////////////////////////////////////////
   ////////////////// LOSOWANIE SŁÓWEK ////////////////////////
+  ////////////////////////////////////////////////////////////
   function losujSlowka() {
     $("#opis-slowka").css({ display: "none" });
     let nr = 0;
@@ -344,14 +376,14 @@ $(document).ready(function () {
         los_slowkaAng[nr] = slowkaAng[losNr];
         los_slowkaPl[nr] = slowkaPl[losNr];
         slowkaAng[losNr] = "x";
-        // console.log(los_slowkaAng[nr]);
-        // console.log(los_slowkaPl[nr]);
         nr++;
       }
     }
   }
 
+  /////////////////////////////////////////////////////////////////////
   //////////////////// LICZENIE WSZYSTKICH SŁÓWEK /////////////////////
+  /////////////////////////////////////////////////////////////////////
   function policzSlowka() {
     let znak = "";
     let nr_znaku = 0;
@@ -364,12 +396,13 @@ $(document).ready(function () {
       if (znak == "-") licznikBazy++;
       nr_znaku++;
     }
-    // console.log(licznikBazy);
 
     if (licznikBazy < formLiczba.value) formLiczba.value = licznikBazy;
   }
 
+  //////////////////////////////////////////////////////////////////
   ////////////////////// OBRACANIE KARTY ///////////////////////////
+  //////////////////////////////////////////////////////////////////
   function kartaObrot() {
     if (strona_karty_akt == "ang-pl") {
       setTimeout(function () {
@@ -395,7 +428,9 @@ $(document).ready(function () {
     }
   }
 
+  //////////////////////////////////////////////////////////////////////
   ///////////////////////  ZNAM  /  NIE ZNAM  //////////////////////////
+  //////////////////////////////////////////////////////////////////////
   function nastepnaPara(x) {
     if (slowkaNr == aktualnyNr + 1) {
       if (x == true) kolor[aktualnyNr] = "var(--word-pl)"; // zieleń
@@ -424,7 +459,9 @@ $(document).ready(function () {
     }
   }
 
+  //////////////////////////////////////////////////////////////////
   /////////////////////// FADE NAPISU NA KARCIE ////////////////////
+  //////////////////////////////////////////////////////////////////
   function cardFade() {
     $(".karta").css("color", "#ffe2d800");
     $(".karta").css("text-shadow", "2px 2px 1px rgba(0,0,0,0)");
@@ -438,8 +475,9 @@ $(document).ready(function () {
       else $(".karta").css("color", "var(--card-txt-pl)");
     }, 250);
   }
-
+  /////////////////////////////////////////////////////////////////
   //////////////////////////  COFNIJ RUCH  ////////////////////////
+  /////////////////////////////////////////////////////////////////
   function cofnijRuch() {
     aktualnyNr--;
     if (znam == false) slowkaNr--;
@@ -454,14 +492,17 @@ $(document).ready(function () {
     kartaObrot();
     cofnijLock = true;
   }
-
+  ////////////////////////////////////////////////////////////////
   ////////////////////////  PASEK POSTĘPU  ///////////////////////
+  ////////////////////////////////////////////////////////////////
   function pasek_postepu() {
     licznikPost = licznikPost + 100 / formLiczba.value;
     $("#pasek").css("width", licznikPost + "%");
   }
 
-  ///////////////////////////  KONIEC  ///////////////////////////
+  ///////////////////////////////////////////////////////////////
+  //////////////////////////  KONIEC  ///////////////////////////
+  ///////////////////////////////////////////////////////////////
   function koniec() {
     $("#opis-slowka").css({ display: "none" });
     $("#pasek").css("width", "100%");
@@ -471,8 +512,9 @@ $(document).ready(function () {
     podsumowanie();
     $("#podsumowanie").delay(1500).slideDown(1000);
   }
-
+  /////////////////////////////////////////////////////////////////
   //////////////////////////  PODSUMOWANIE  ///////////////////////
+  /////////////////////////////////////////////////////////////////
   function podsumowanie() {
     let listaNr = 0;
     licznikPar = formLiczba.value;
@@ -486,9 +528,14 @@ $(document).ready(function () {
           los_slowkaAng[listaNr] +
           "</span>"
       );
-      if (kolor[listaNr] == "var(--word-pl)") {
-        zapiszZnane(los_slowkaAng[listaNr]);
+
+      ////////////////////////////
+      if (kolor[listaNr] == "var(--word-ang)") {
+        zapiszNieznane(`${los_slowkaAng[listaNr]}-${los_slowkaPl[listaNr]}`);
+        $("#zapisane").remove();
+        dodajZapisaneDoHTML(localStorage.getItem("zapisane slowka"));
       }
+      //////////////////////////////
       $("#lista").append(
         '<span style="color:' + kolor[listaNr] + '"> - </span>'
       );
@@ -508,35 +555,27 @@ $(document).ready(function () {
     cofnijLock = true;
   }
 
-  localStorage.setItem("znane slowka", ""); // empty storage for tests
-
-  let znaneSlowka = localStorage.getItem("znane slowka");
-  if (znaneSlowka == null || znaneSlowka == "") {
-    localStorage.setItem("znane slowka", JSON.stringify(["znane: "]));
+  //////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////  ZAPISYWANIE NIEZNANYCH SŁÓWEK  //////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////
+  function zapiszNieznane(zapisane) {
+    zapisane = zapisane.trim();
+    zapisaneSlowka = JSON.parse(localStorage.getItem("zapisane slowka"));
+    if (!zapisaneSlowka.includes(zapisane)) zapisaneSlowka.push(zapisane);
+    localStorage.setItem("zapisane slowka", JSON.stringify(zapisaneSlowka));
   }
 
-  function zapiszZnane(slowko) {
-    znaneSlowka = JSON.parse(localStorage.getItem("znane slowka"));
-    znaneSlowka.push(slowko);
-    localStorage.setItem("znane slowka", JSON.stringify(znaneSlowka));
-    // console.log(localStorage.getItem("znane slowka"));
+  function dodajZapisaneDoHTML(lista) {
+    // console.log(JSON.parse(lista).flat().join("\n"));
+    $("#baza_slowek").append(
+      `<div id="zapisane" title="zapisane słówka"> ${JSON.parse(lista).join(
+        "\n"
+      )}\n</div>`
+    );
   }
-
-  function sprawdzZnane() {
-    let nrSlowka = 0;
-    let nrZnane = 0;
-    while (slowkaAng[nrSlowka] != null) {
-      while (znaneSlowka[nrZnane] != null) {
-        if (slowkaAng[nrSlowka] == znaneSlowka[nrZnane]) {
-          console.log("równe: " + slowkaAng[nrSlowka]);
-        }
-        nrZnane++;
-      }
-      nrSlowka++;
-      nrZnane = 0;
-    }
-  }
+  //////////////////////////////////////////////////////////////////
   ///////////////////////  ANG WORDS API  //////////////////////////
+  //////////////////////////////////////////////////////////////////
   let sound = null;
 
   const link = "https://api.dictionaryapi.dev/api/v2/entries/en/";
@@ -565,7 +604,9 @@ $(document).ready(function () {
           );
         }
         if (data[0].meanings[0].definitions[0].example != undefined) {
-          $("#opis").append(`<hr><b>Example: </b>${data[0].meanings[0].definitions[0].example}`);
+          $("#opis").append(
+            `<hr><b>Example: </b>${data[0].meanings[0].definitions[0].example}`
+          );
         }
         if (data[0].phonetics[0].audio != "") {
           sound = new Audio(data[0].phonetics[0].audio);
@@ -573,7 +614,7 @@ $(document).ready(function () {
         } else {
           $("#audio-btn").css({ display: "none" });
         }
-        console.log(data);
+        // console.log(data);
       });
     // .catch((err) => {
     //   alert("Something went wrong!", err);
@@ -585,7 +626,9 @@ $(document).ready(function () {
   });
 });
 
-///////////////////////  KOLORYSTYKA STRONY  //////////////////////////
+/////////////////////////////////////////////////////////////////////////
+///////////////////////   KOLORYSTYKA STRONY   //////////////////////////
+/////////////////////////////////////////////////////////////////////////
 let themeActual = localStorage.getItem("ang-pl-site");
 
 setTheme(themeActual);

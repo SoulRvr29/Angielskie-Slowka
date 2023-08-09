@@ -218,6 +218,7 @@ nav {
   border-radius: 0.4rem;
   padding: 0 0.5rem;
   text-overflow: ellipsis;
+  font-size: 1rem;
 }
 #ang_pl:hover,
 #przyciskZestaw:hover {
@@ -251,7 +252,8 @@ nav {
 }
 #opis-btn {
   opacity: 0.5;
-  position: absolute;
+  /* position: absolute; */
+  height: 1.875rem;
   display: flex;
   align-items: center;
   right: 1rem;
@@ -328,7 +330,9 @@ nav {
   background-color: var(--button-bkg);
   text-align: center;
 }
-
+div[title="zapisane słówka"] .zestaw {
+  background-color: var(--unknown-bkg);
+}
 /************************* LOSOWANIE **************************/
 #losowanie {
   height: 2.5rem;
@@ -601,6 +605,7 @@ footer {
   #ang_pl,
   #przyciskZestaw {
     padding: 3px;
+    font-size: 0.9rem;
   }
   #ang_pl {
     line-height: 1;
@@ -613,7 +618,7 @@ footer {
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
   }
 }
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 430px) {
   .karta {
     font-size: 2rem;
     width: 18rem;
@@ -657,7 +662,7 @@ footer {
     max-width: 16rem;
   }
 }
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 400px) {
   .karta {
     font-size: 1.7rem;
     width: 16rem;
@@ -669,8 +674,12 @@ footer {
   #top {
     width: 16rem;
   }
-  nav {
+  #ang_pl,
+  #przyciskZestaw {
     font-size: 0.7rem;
+  }
+  nav {
+    font-size: 0.6rem;
     font-weight: 700;
     gap: 0.3rem;
   }
