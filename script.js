@@ -511,6 +511,7 @@ $(document).ready(function () {
     $("#pod_karta").hide();
     podsumowanie();
     $("#podsumowanie").delay(1500).slideDown(1000);
+    $("#opis-slowka").css({ display: "none" });
   }
   /////////////////////////////////////////////////////////////////
   //////////////////////////  PODSUMOWANIE  ///////////////////////
@@ -529,12 +530,21 @@ $(document).ready(function () {
           "</span>"
       );
 
-      ////////////////////////////
+      //////////////////////////// 
       if (kolor[listaNr] == "var(--word-ang)") {
         zapiszNieznane(`${los_slowkaAng[listaNr]}-${los_slowkaPl[listaNr]}`);
         $("#zapisane").remove();
         dodajZapisaneDoHTML(localStorage.getItem("zapisane slowka"));
       }
+
+      if (kolor[listaNr] != "var(--word-ang)") {
+        usunZnane(`${los_slowkaAng[listaNr]}-${los_slowkaPl[listaNr]}`);
+        $("#zapisane").remove();
+        dodajZapisaneDoHTML(localStorage.getItem("zapisane slowka"));
+
+      }
+
+
       //////////////////////////////
       $("#lista").append(
         '<span style="color:' + kolor[listaNr] + '"> - </span>'
@@ -562,6 +572,12 @@ $(document).ready(function () {
     zapisane = zapisane.trim();
     zapisaneSlowka = JSON.parse(localStorage.getItem("zapisane slowka"));
     if (!zapisaneSlowka.includes(zapisane)) zapisaneSlowka.push(zapisane);
+    localStorage.setItem("zapisane slowka", JSON.stringify(zapisaneSlowka));
+  }
+  function usunZnane(zapisane) {
+    zapisane = zapisane.trim();
+    zapisaneSlowka = JSON.parse(localStorage.getItem("zapisane slowka"));
+    zapisaneSlowka = zapisaneSlowka.filter(slowko => slowko != zapisane);
     localStorage.setItem("zapisane slowka", JSON.stringify(zapisaneSlowka));
   }
 
