@@ -3,8 +3,8 @@
 <svg xmlns="http://www.w3.org/2000/svg">
 <metadata>Copyright (C) 2023 by original authors @ fontello.com</metadata>
 <defs>
-<font id="fontello" horiz-adv-x="1000" >
-<font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
+<font id="face" horiz-adv-x="1000" >
+<font-face font-family="face" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
 <missing-glyph horiz-adv-x="1000" />
 <glyph glyph-name="plus" unicode="&#xe800;" d="M786 439v-107q0-22-16-38t-38-15h-232v-233q0-22-16-37t-38-16h-107q-22 0-38 16t-15 37v233h-232q-23 0-38 15t-16 38v107q0 23 16 38t38 16h232v232q0 22 15 38t38 16h107q23 0 38-16t16-38v-232h232q23 0 38-16t16-38z" horiz-adv-x="785.7" />
 
@@ -14,7 +14,11 @@
 
 <glyph glyph-name="ok" unicode="&#xe803;" d="M933 534q0-22-16-38l-404-404-76-76q-16-15-38-15t-38 15l-76 76-202 202q-15 16-15 38t15 38l76 76q16 16 38 16t38-16l164-165 366 367q16 16 38 16t38-16l76-76q16-15 16-38z" horiz-adv-x="1000" />
 
-<glyph glyph-name="cancel" unicode="&#xe804;" d="M724 112q0-22-15-38l-76-76q-16-15-38-15t-38 15l-164 165-164-165q-16-15-38-15t-38 15l-76 76q-16 16-16 38t16 38l164 164-164 164q-16 16-16 38t16 38l76 76q16 16 38 16t38-16l164-164 164 164q16 16 38 16t38-16l76-76q15-15 15-38t-15-38l-164-164 164-164q15-15 15-38z" horiz-adv-x="785.7" />
+<glyph glyph-name="left-dir" unicode="&#xe804;" d="M357 600v-500q0-14-10-25t-26-11-25 11l-250 250q-10 11-10 25t10 25l250 250q11 11 25 11t26-11 10-25z" horiz-adv-x="357.1" />
+
+<glyph glyph-name="right-dir" unicode="&#xe805;" d="M321 350q0-14-10-25l-250-250q-11-11-25-11t-25 11-11 25v500q0 15 11 25t25 11 25-11l250-250q10-10 10-25z" horiz-adv-x="357.1" />
+
+<glyph glyph-name="cancel" unicode="&#xe806;" d="M724 112q0-22-15-38l-76-76q-16-15-38-15t-38 15l-164 165-164-165q-16-15-38-15t-38 15l-76 76q-16 16-16 38t16 38l164 164-164 164q-16 16-16 38t16 38l76 76q16 16 38 16t38-16l164-164 164 164q16 16 38 16t38-16l76-76q15-15 15-38t-15-38l-164-164 164-164q15-15 15-38z" horiz-adv-x="785.7" />
 
 <glyph glyph-name="left-small" unicode="&#xe807;" d="M595 403q21 0 36-16t15-37-15-37-36-15l-395 0 119-119q15-15 15-37t-15-37-36-15q-23 0-38 15l-245 245 245 245q15 15 37 15t37-15 15-37-15-37l-119-118 395 0z" horiz-adv-x="646" />
 </font>

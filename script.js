@@ -130,9 +130,9 @@ $(document).ready(function () {
   $("#przyciskMinus").click(function () {
     //przycisk minus
     if (formLiczba.value > 1) {
-      $("#przyciskPlus")
-        .html(' <i class="icon-plus"></i> ')
-        .css({ fontSize: "20px", lineHeight: "160%" });
+      // $("#przyciskPlus")
+      //   .html(' <i class="icon-plus"></i> ')
+      //   .css({ fontSize: "20px", lineHeight: "160%" });
       formLiczba.value--;
       $("#divLiczbySlowek").text(formLiczba.value);
       localStorage.setItem("liczba slowek", formLiczba.value);
@@ -150,13 +150,21 @@ $(document).ready(function () {
       localStorage.setItem("liczba slowek", formLiczba.value);
       formWidth(formLiczba.value);
     }
-    if (formLiczba.value == licznikBazy) {
-      $("#przyciskPlus")
-        .text("max")
-        .css({ fontSize: "12px", lineHeight: "240%" });
-    }
+    // if (formLiczba.value == licznikBazy) {
+    //   $("#przyciskPlus")
+    //     .text("max")
+    //     .css({ fontSize: "12px", lineHeight: "240%" });
+    // }
     $("#plansza").slideUp();
     $("#podsumowanie").slideUp();
+  });
+
+  $("#max-btn").click(function () {
+    if(licznikBazy > 99) formLiczba.value = 99;
+    else  formLiczba.value = licznikBazy;
+    $("#divLiczbySlowek").text(formLiczba.value);
+    localStorage.setItem("liczba slowek", formLiczba.value);
+    formWidth(formLiczba.value);
   });
 
   $("#cofnij").click(function () {
@@ -177,6 +185,7 @@ $(document).ready(function () {
   $("#formLiczba").focusout(function () {
     // wyjście z okienka formularza
     if (formLiczba.value > 99) formLiczba.value = 99;
+    // $("#formLiczba").css({display: none});
     if (formLiczba.value > licznikBazy) formLiczba.value = licznikBazy;
     localStorage.setItem("liczba slowek", formLiczba.value);
     formWidth(formLiczba.value);
@@ -194,10 +203,10 @@ $(document).ready(function () {
   $(".zestaw").click(function () {
     // przyciski listy zestawów
     wyborZestawu(this.title);
-    if (formLiczba.value < licznikBazy)
-      $("#przyciskPlus")
-        .html(' <i class="icon-plus"></i> ')
-        .css({ fontSize: "20px", lineHeight: "160%" });
+    // if (formLiczba.value < licznikBazy)
+    //   $("#przyciskPlus")
+    //     .html(' <i class="icon-plus"></i> ')
+    //     .css({ fontSize: "20px", lineHeight: "160%" });
     $("#zestawSlowka").slideUp(0);
     przyciskRozwin();
     $("#zestawSlowka").slideToggle(700);

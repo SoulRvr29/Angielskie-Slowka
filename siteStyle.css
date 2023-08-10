@@ -12,6 +12,7 @@
   --button-bkg-hover: #18588d;
   --button-brd: #aa9482;
   --button-brd-hover: #ffefea;
+  --button-shd: 3px 3px 5px rgba(0, 0, 0, 0.4);
   --highlight: #ffffff;
   --progress-bar-bkg: #4a4f58;
   --progress-bar: #3a9000;
@@ -47,6 +48,7 @@
   --button-bkg-hover: #618c9e;
   --button-brd: #2d3b41;
   --button-brd-hover: #c5e0ec;
+  --button-shd: 2px 2px 4px rgba(0, 0, 0, 0.185);
   --highlight: #ffffff;
   --progress-bar-bkg: #414141;
   --progress-bar: #bbbbbb;
@@ -79,6 +81,7 @@
   --button-bkg-hover: #c54619;
   --button-brd: #e47f5a;
   --button-brd-hover: #ffe2d8;
+  --button-shd: 3px 3px 5px rgba(0, 0, 0, 0.644);
   --highlight: #ffffff;
   --progress-bar-bkg: #8c0000;
   --progress-bar: #3a9000;
@@ -164,21 +167,33 @@ nav {
   align-items: center;
   flex-wrap: nowrap;
   height: 2.25rem;
-  max-width: 26rem;
-  gap: 0.5rem;
+  max-width: 30rem;
+  gap: 1.2rem;
   margin: 0 auto;
 }
+.wybor-liczby-container{
+  display: flex;
+  align-items: center;
+}
 .przyciskiPM {
-  font-size: 1.25rem;
-  line-height: 160%;
-  width: 2.125rem;
-  height: 2.125rem;
-  border: 2px solid var(--button-brd);
-  border-radius: 50%;
+  display: grid;
+  place-content: center;
+  font-size: 1.5rem;
+  width: 1rem;
+  /* line-height: 160%; */
+  /* width: 2.125rem; */
+  /* height: 2.125rem; */
+  /* border: 2px solid var(--button-brd); */
+  /* border-radius: 50%; */
+  /* transition: all 0.2s; */
+  text-shadow: var(--button-shd);
 }
 .przyciskiPM:hover {
-  border: 2px solid var(--button-brd-hover);
+  /* border: 2px solid var(--button-brd-hover); */
   cursor: pointer;
+  color: var(--button-brd-hover);
+  scale: 130%;
+  margin-bottom: 3px;
 }
 #divLiczbySlowek {
   transition: all 0.3s;
@@ -196,13 +211,15 @@ nav {
   border-radius: 0.5rem;
   font-size: 1.5rem;
   outline: none;
+  text-align: center;
+  text-shadow: var(--button-shd);
 }
 #formLiczba:hover {
   cursor: pointer;
   color: var(--highlight);
 }
 #formLiczba:focus {
-  border: 2px solid var(--text-light);
+  border: 1px solid var(--text-light);
   border-radius: 0.5rem;
   background-color: var(--border-dark);
   color: var(--highlight);
@@ -214,16 +231,30 @@ nav {
   height: 1.875rem;
   color: var(--text-light);
   background-color: var(--button-bkg);
-  border: 2px solid var(--button-brd);
+  border: 2px outset var(--button-brd);
   border-radius: 0.4rem;
   padding: 0 0.5rem;
   text-overflow: ellipsis;
   font-size: 1rem;
+  box-shadow: var(--button-shd);
+}
+#max-btn {
+  display: flex;
+  align-items: center;
+  /* height: 1.875rem; */
+  color: var(--text-light);
+  background-color: var(--button-bkg);
+  border: 2px outset var(--button-brd);
+  border-radius: 0.4rem;
+  padding: 0 0.2rem;
+  font-size: 0.8rem;
+  box-shadow: var(--button-shd);
 }
 #ang_pl:hover,
-#przyciskZestaw:hover {
+#przyciskZestaw:hover,
+#max-btn:hover {
   background-color: var(--button-bkg-hover);
-  border: 2px solid var(--button-brd-hover);
+  border: 2px outset var(--button-brd-hover);
   cursor: pointer;
 }
 .switchContainer h2 {
@@ -234,10 +265,11 @@ nav {
 .switch {
   appearance: none;
   background-color: var(--button-bkg);
-  border: 2px solid var(--button-brd);
+  border: 2px outset var(--button-brd);
   border-radius: 10rem;
   width: 3rem;
   padding: 0.19rem;
+  box-shadow: var(--button-shd);
 }
 .switch::-webkit-slider-thumb {
   appearance: none;
@@ -253,7 +285,7 @@ nav {
 #opis-btn {
   opacity: 0.5;
   /* position: absolute; */
-  height: 1.875rem;
+  /* height: 1.875rem; */
   display: flex;
   align-items: center;
   right: 1rem;
@@ -261,14 +293,15 @@ nav {
   font-size: 0.7rem;
   color: var(--text-light);
   background-color: var(--button-bkg);
-  border: 2px solid var(--button-brd);
+  border: 2px outset var(--button-brd);
   border-radius: 0.4rem;
   padding: 0.1rem 0.3rem;
   text-overflow: ellipsis;
+  box-shadow: var(--button-shd);
 }
 #opis-btn:hover {
   background-color: var(--button-bkg-hover);
-  border: 2px solid var(--button-brd-hover);
+  border: 2px outset var(--button-brd-hover);
   cursor: pointer;
   opacity: 1;
 }
@@ -341,15 +374,16 @@ div[title="zapisane słówka"] .zestaw {
   color: var(--text-light);
   line-height: 135%;
   background-color: var(--button-bkg);
-  border: 2px solid var(--button-brd);
+  border: 2px outset var(--button-brd);
   border-radius: 20px;
   margin-left: auto;
   margin-right: auto;
   transition: all 0.2s;
+  box-shadow: var(--button-shd);
 }
 #losowanie:hover {
   background-color: var(--button-bkg-hover);
-  border: 2px solid var(--button-brd-hover);
+  border: 2px outset var(--button-brd-hover);
   cursor: pointer;
   scale: 107%;
 }
@@ -597,7 +631,13 @@ footer {
     font-size: 0.9rem;
   }
 }
-@media screen and (max-width: 460px) {
+
+@media screen and (max-width: 470px) {
+  nav{
+    gap: 0.5rem;
+  }
+}
+@media screen and (max-width: 420px) {
   nav {
     font-size: 0.9rem;
     line-height: 150%;
@@ -618,7 +658,7 @@ footer {
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
   }
 }
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 350px) {
   .karta {
     font-size: 2rem;
     width: 18rem;

@@ -3,5 +3,7 @@
 .icon-minus:before { content: '\e801'; } /* '' */
 .icon-down-small:before { content: '\e802'; } /* '' */
 .icon-ok:before { content: '\e803'; } /* '' */
-.icon-cancel:before { content: '\e804'; } /* '' */
+.icon-left-dir:before { content: '\e804'; } /* '' */
+.icon-right-dir:before { content: '\e805'; } /* '' */
+.icon-cancel:before { content: '\e806'; } /* '' */
 .icon-left-small:before { content: '\e807'; } /* '' */

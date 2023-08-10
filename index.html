@@ -7,7 +7,7 @@
     <meta name="description" content="Strona do nauki angielskich słówek" />
     <meta name="keywords" content="angielski, słówka, fiszki, nauka" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/fontello.css" />
+    <link rel="stylesheet" href="css/face.css" />
     <link rel="stylesheet" href="siteStyle.css" />
     <link rel="shortcut icon" href="icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -15,40 +15,44 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=PT+Serif:ital,wght@1,400;1,700&display=swap"
       rel="stylesheet"
-    />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <script src="script.js"></script>
-  </head>
-  <body>
-    <div id="strona">
-      <header>
-        <div id="logo">Angielskie Słówka</div>
-        <nav>
-          <div class="przyciskiPM" id="kategoria" style="display: none">
-            Kategoria
-          </div>
-          <div class="przyciskiPM" id="przyciskMinus">
-            <i class="icon-minus"></i>
-          </div>
-          <div id="formularz">
-            <form>
-              <input
-                type="text"
-                min="1"
-                max="99"
-                id="formLiczba"
-                maxlength="2"
-                name="liczba"
-                value="10"
-                onfocus="this.value=''"
-              />
-            </form>
-          </div>
-          <div class="przyciskiPM" id="przyciskPlus">
-            <i class="icon-plus"></i>
-          </div>
+	  />
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	  <script src="script.js"></script>
+	</head>
+	<body>
+		<div id="strona">
+			<header>
+				<div id="logo">Angielskie Słówka</div>
+				<nav>
+					<div class="wybor-liczby-container">
+						<div class="przyciskiPM" id="kategoria" style="display: none">
+							Kategoria
+						</div>
+						<div class="przyciskiPM" id="przyciskMinus">
+							<i class="icon-left-dir"></i>
+						</div>
+						<div id="formularz">
+							<form>
+								<input
+								type="text"
+								min="1"
+								max="99"
+								id="formLiczba"
+								maxlength="2"
+								name="liczba"
+					value="10"
+					onfocus="this.value=''"
+					/>
+				</form>
+			</div>
+			<div class="przyciskiPM" id="przyciskPlus">
+				<i class="icon-right-dir"></i>
+			</div>
+		</div>
+		<div id="max-btn">MAX</div>
           <div id="ang_pl"></div>
           <div id="przyciskZestaw">ZESTAW</div>
+          <div id="opis-btn">OPIS</div>
           <div class="switchContainer">
             <h2>THEME</h2>
             <input
@@ -61,7 +65,6 @@
               value="1"
             />
           </div>
-          <div id="opis-btn">OPIS</div>
         </nav>
       </header>
       <main>
