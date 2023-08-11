@@ -239,7 +239,7 @@ nav {
 #przyciskZestaw {
   display: flex;
   align-items: center;
-  height: 1.875rem;
+  height: 1.6rem;
   color: var(--text-light);
   background-color: var(--button-bkg);
   border: 2px outset var(--button-brd);
@@ -252,7 +252,7 @@ nav {
 #max-btn {
   display: flex;
   align-items: center;
-  /* height: 1.875rem; */
+  height: 1.6rem;
   color: var(--text-light);
   background-color: var(--button-bkg);
   border: 2px outset var(--button-brd);
@@ -270,8 +270,9 @@ nav {
 }
 .switchContainer h2 {
   font-size: 0.6rem;
-  letter-spacing: 0.1rem;
+  letter-spacing: 0.2rem;
   line-height: 1.4;
+  margin-top: 2px;
 }
 .switch {
   appearance: none;
@@ -296,7 +297,7 @@ nav {
 #opis-btn {
   opacity: 0.5;
   /* position: absolute; */
-  /* height: 1.875rem; */
+  height: 1.6rem;
   display: flex;
   align-items: center;
   right: 1rem;
@@ -347,9 +348,11 @@ nav {
 #wybranyZestaw {
   display: inline-block;
   color: var(--text-medium);
+  background: var(--background-body);
   font-size: 1rem;
   margin: 2vh auto 2vh auto;
-  border-bottom: var(--border-dark);
+  /* border-bottom: var(--border-dark); */
+  border: 1px dashed var(--button-brd);
   padding: 3px 10px;
 }
 .zestaw {
