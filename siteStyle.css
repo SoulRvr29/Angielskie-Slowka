@@ -42,15 +42,15 @@
   --background-brd2: 2px solid #e6dccd;
   --text-light: #ffffff;
   --text-medium: #ffffff;
-  --text-shd: 2px 2px 2px rgba(0, 0, 0, 0.1);
+  --text-shd: 2px 2px 1px rgba(0, 0, 0, 0.1);
   --logo: #e9e9e9;
   --button-bkg: #4a6f7e;
   --button-bkg-hover: #618c9e;
-  --button-brd: #2d3b41;
+  --button-brd: #d1dce0;
   --button-brd-hover: #c5e0ec;
-  --button-shd: 2px 2px 4px rgba(0, 0, 0, 0.185);
+  --button-shd: 2px 2px 2px rgba(0, 0, 0, 0.25);
   --highlight: #ffffff;
-  --progress-bar-bkg: #414141;
+  --progress-bar-bkg: #575757;
   --progress-bar: #bbbbbb;
   --card-txt-pl: #424242;
   --card-txt-ang: #d8d8d8;
@@ -63,8 +63,8 @@
   --known-brd: #2d3b41;
   --unknown-bkg: #883939;
   --unknown-brd: #551b1b;
-  --word-pl: #2f491d;
-  --word-ang: #74351e;
+  --word-pl: #283d19;
+  --word-ang: #642e1a;
   --word-dash: #000000;
 }
 .theme3 {
@@ -559,6 +559,8 @@ div[title="zapisane słówka"] .zestaw {
   border: 3px solid var(--button-bkg);
   line-height: 140%;
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.4);
+  -webkit-user-select: text;
+  user-select: text;
 }
 /* #opis b {
   text-transform: uppercase;
@@ -568,11 +570,13 @@ div[title="zapisane słówka"] .zestaw {
   position: absolute;
   top: 0rem;
   right: 0rem;
+  padding-left: 2px;
   font-size: 2.5rem;
   background-color: var(--button-bkg);
   height: 2rem;
   width: 2rem;
   border: 1px solid var(--button-brd);
+  border-radius: 0 0 0 0.8rem;
   line-height: 0.75;
 }
 #audio-btn:hover {
@@ -621,9 +625,9 @@ footer {
   top: 100%;
   width: 100%;
   text-align: center;
-  height: 2.4rem;
-  border-top: 2px solid var(--button-brd);
-  border-bottom: 2px solid var(--button-brd);
+  /* height: 2.4rem; */
+  border-top: 1px solid var(--button-brd);
+  border-bottom: 1px solid var(--button-brd);
   background-color: var(--button-bkg);
   line-height: 1.6;
 }
@@ -724,6 +728,12 @@ footer {
   #wybranyZestaw {
     font-size: 0.8rem;
   }
+  #opis-btn {
+    top: 3.1rem;
+  }
+  .switchContainer {
+    top: 2.6rem;
+  }
 }
 @media screen and (max-width: 350px) {
   .karta {
@@ -778,9 +788,15 @@ footer {
   #przyciskZestaw {
     font-size: 0.7rem;
   }
-  @media screen and (max-width: 300px) {
-    #wybranyZestaw {
-      font-size: 0.6rem;
-    }
+  #opis-btn {
+    top: 3.02rem;
+  }
+  .switchContainer {
+    top: 2.5rem;
+  }
+}
+@media screen and (max-width: 300px) {
+  #wybranyZestaw {
+    font-size: 0.6rem;
   }
 }

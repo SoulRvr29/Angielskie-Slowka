@@ -635,7 +635,7 @@ $(document).ready(function () {
         if (synonym.length) {
           $("#opis").append("<hr><b>Synonyms: </b>");
           for (let i = 0; i < 5; i++) {
-            $("#opis").append(`${synonym[i]}, `);
+            if (synonym[i] != undefined) $("#opis").append(`${synonym[i]}, `);
           }
         }
 
