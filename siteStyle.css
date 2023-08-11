@@ -2,8 +2,8 @@
   --background-body: #2b2b2b;
   --background-site: #141414;
   --background-texture: url(denim-medium.png);
-  --background-brd: 2px solid #585048;
-  --background-brd2: 2px solid #aa9482;
+  --background-brd: 2px solid #24211e;
+  --background-brd2: 2px solid #817266;
   --text-light: #d8cbc1;
   --text-medium: #d3a595;
   --text-shd: 2px 2px 1px rgba(0, 0, 0, 0.4);
@@ -71,7 +71,7 @@
   --background-body: #141414;
   --background-site: #141414;
   --background-texture: url(denim-dark.png);
-  --background-brd: 2px solid #573f35;
+  --background-brd: 2px solid #412f27;
   --background-brd2: 2px solid #d55629;
   --text-light: #ffe2d8;
   --text-medium: #d3a595;
@@ -147,18 +147,29 @@ hr {
   border-right: var(--background-brd);
   margin: 0 auto;
 }
-
 /************************* LOGO **************************/
 #logo {
   font-size: min(10vw, 45px);
   color: var(--logo);
   font-weight: 700;
-  border-bottom: var(--background-brd2);
+  /* border-bottom: var(--background-brd2); */
   line-height: 160%;
   margin-bottom: 1.25rem;
   padding-bottom: 0.3rem;
 }
-
+#line {
+  height: 2px;
+  width: 80%;
+  margin: -1rem auto 1rem auto;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0),
+    var(--button-brd),
+    var(--text-light),
+    var(--button-brd),
+    rgba(255, 255, 255, 0)
+  );
+}
 /************************* MENU GŁÓWNE **************************/
 nav {
   position: relative;
@@ -171,7 +182,7 @@ nav {
   gap: 1.2rem;
   margin: 0 auto;
 }
-.wybor-liczby-container{
+.wybor-liczby-container {
   display: flex;
   align-items: center;
 }
@@ -312,7 +323,8 @@ nav {
   position: relative;
   max-width: 19rem;
   margin: 5.1vh auto;
-  max-height: 20vh;
+  /* max-height: 20vh; */
+  max-height: 50vh;
   overflow: auto;
 }
 #zestawSlowka {
@@ -320,7 +332,8 @@ nav {
   border-bottom: var(--background-brd2);
   margin: 3vh auto;
   max-width: 17.5rem;
-  max-height: 33vh;
+  /* max-height: 33vh; */
+  max-height: 52vh;
   font-size: 1rem;
   font-weight: 600;
   text-align: left;
@@ -633,7 +646,7 @@ footer {
 }
 
 @media screen and (max-width: 470px) {
-  nav{
+  nav {
     gap: 0.5rem;
   }
 }
@@ -658,17 +671,45 @@ footer {
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
   }
 }
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 400px) {
   .karta {
-    font-size: 2rem;
+    font-size: 1.7rem;
     width: 18rem;
-    height: 8rem;
+    height: 7.5rem;
   }
   #pasek_postepu,
   #pasekTekst,
   #lista,
   #top {
     width: 18rem;
+  }
+  #ang_pl,
+  #przyciskZestaw {
+    font-size: 0.7rem;
+  }
+  nav {
+    font-size: 0.6rem;
+    font-weight: 700;
+    gap: 0.3rem;
+  }
+  #formLiczba {
+    font-size: 1.2rem;
+  }
+  #max-btn {
+    font-size: 0.7rem;
+  }
+}
+@media screen and (max-width: 350px) {
+  .karta {
+    font-size: 2rem;
+    width: 16rem;
+    height: 8rem;
+  }
+  #pasek_postepu,
+  #pasekTekst,
+  #lista,
+  #top {
+    width: 16rem;
   }
   #pod_karta {
     max-width: 18rem;
@@ -700,30 +741,5 @@ footer {
   #podsumowanie,
   #top {
     max-width: 16rem;
-  }
-}
-@media screen and (max-width: 400px) {
-  .karta {
-    font-size: 1.7rem;
-    width: 16rem;
-    height: 7.5rem;
-  }
-  #pasek_postepu,
-  #pasekTekst,
-  #lista,
-  #top {
-    width: 16rem;
-  }
-  #ang_pl,
-  #przyciskZestaw {
-    font-size: 0.7rem;
-  }
-  nav {
-    font-size: 0.6rem;
-    font-weight: 700;
-    gap: 0.3rem;
-  }
-  #formLiczba {
-    font-size: 1.2rem;
   }
 }

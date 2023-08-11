@@ -160,8 +160,8 @@ $(document).ready(function () {
   });
 
   $("#max-btn").click(function () {
-    if(licznikBazy > 99) formLiczba.value = 99;
-    else  formLiczba.value = licznikBazy;
+    if (licznikBazy > 99) formLiczba.value = 99;
+    else formLiczba.value = licznikBazy;
     $("#divLiczbySlowek").text(formLiczba.value);
     localStorage.setItem("liczba slowek", formLiczba.value);
     formWidth(formLiczba.value);
@@ -208,6 +208,7 @@ $(document).ready(function () {
     //     .html(' <i class="icon-plus"></i> ')
     //     .css({ fontSize: "20px", lineHeight: "160%" });
     $("#zestawSlowka").slideUp(0);
+    if ($(document).width() < 800) $("#zestawyLista").slideUp();
     przyciskRozwin();
     $("#zestawSlowka").slideToggle(700);
   });
@@ -539,21 +540,14 @@ $(document).ready(function () {
           "</span>"
       );
 
-      //////////////////////////// 
+      ////////////////////////////
       if (kolor[listaNr] == "var(--word-ang)") {
         zapiszNieznane(`${los_slowkaAng[listaNr]}-${los_slowkaPl[listaNr]}`);
-        $("#zapisane").remove();
-        dodajZapisaneDoHTML(localStorage.getItem("zapisane slowka"));
       }
 
       if (kolor[listaNr] != "var(--word-ang)") {
         usunZnane(`${los_slowkaAng[listaNr]}-${los_slowkaPl[listaNr]}`);
-        $("#zapisane").remove();
-        dodajZapisaneDoHTML(localStorage.getItem("zapisane slowka"));
-
       }
-
-
       //////////////////////////////
       $("#lista").append(
         '<span style="color:' + kolor[listaNr] + '"> - </span>'
@@ -569,6 +563,8 @@ $(document).ready(function () {
       if (kolor[listaNr] == "var(--word-pl)") licznikZnam++;
       listaNr++;
     }
+    $("#zapisane").remove();
+    dodajZapisaneDoHTML(localStorage.getItem("zapisane slowka"));
 
     $("#licznikZnam").text(licznikZnam + " / " + formLiczba.value);
     cofnijLock = true;
@@ -577,16 +573,16 @@ $(document).ready(function () {
   //////////////////////////////////////////////////////////////////////////////////
   ///////////////////////  ZAPISYWANIE NIEZNANYCH SŁÓWEK  //////////////////////////
   //////////////////////////////////////////////////////////////////////////////////
-  function zapiszNieznane(zapisane) {
-    zapisane = zapisane.trim();
+  function zapiszNieznane(slowko) {
+    slowko = slowko.trim();
     zapisaneSlowka = JSON.parse(localStorage.getItem("zapisane slowka"));
-    if (!zapisaneSlowka.includes(zapisane)) zapisaneSlowka.push(zapisane);
+    if (!zapisaneSlowka.includes(slowko)) zapisaneSlowka.push(slowko);
     localStorage.setItem("zapisane slowka", JSON.stringify(zapisaneSlowka));
   }
-  function usunZnane(zapisane) {
-    zapisane = zapisane.trim();
+  function usunZnane(slowko) {
+    slowko = slowko.trim();
     zapisaneSlowka = JSON.parse(localStorage.getItem("zapisane slowka"));
-    zapisaneSlowka = zapisaneSlowka.filter(slowko => slowko != zapisane);
+    zapisaneSlowka = zapisaneSlowka.filter((item) => item != slowko);
     localStorage.setItem("zapisane slowka", JSON.stringify(zapisaneSlowka));
   }
 
@@ -604,7 +600,9 @@ $(document).ready(function () {
   let sound = null;
 
   const link = "https://api.dictionaryapi.dev/api/v2/entries/en/";
+
   const apiDownload = (slowo) => {
+    sound = null;
     fetch(link + slowo)
       .then((response) => {
         if (response.ok) {
@@ -619,28 +617,66 @@ $(document).ready(function () {
         }
       })
       .then((data) => {
+        ///////////// MEANING /////////////
         $("#opis").html(
           `<b>Meaning: </b>${data[0].meanings[0].definitions[0].definition}`
         );
-        if (data[0].meanings[0].synonyms[0] != undefined) {
+        //////////// SYNONYMS /////////////
+        let synonym = [];
+
+        data.forEach((item) => {
+          item.meanings.forEach((meaning) => {
+            if (meaning.synonyms.length) {
+              synonym = synonym.concat(meaning.synonyms);
+              console.log(synonym);
+            }
+          });
+        });
+        if (synonym.length) {
           $("#opis").append("<hr><b>Synonyms: </b>");
-          data[0].meanings[0].synonyms.forEach((item) =>
-            $("#opis").append(`${item}, `)
-          );
+          for (let i = 0; i < 5; i++) {
+            $("#opis").append(`${synonym[i]}, `);
+          }
         }
-        if (data[0].meanings[0].definitions[0].example != undefined) {
-          $("#opis").append(
-            `<hr><b>Example: </b>${data[0].meanings[0].definitions[0].example}`
-          );
+
+        /////////// EXAMPLE //////////////
+        let example = [];
+
+        data.forEach((item) => {
+          item.meanings.forEach((meaning) => {
+            meaning.definitions.forEach((definition) => {
+              if (definition.example) {
+                example.push(definition.example);
+              }
+            });
+          });
+        });
+
+        if (example.length) {
+          $("#opis").append(`<hr><b>Example: </b>${example[0]}`);
         }
-        if (data[0].phonetics[0].audio != "") {
-          sound = new Audio(data[0].phonetics[0].audio);
+
+        // if (data[0].meanings[0].definitions[0].example != undefined) {
+        //   $("#opis").append(
+        //     `<hr><b>Example: </b>${data[0].meanings[0].definitions[0].example}`
+        //   );
+        // }
+
+        /////////// SOUNDS //////////////
+        data.forEach((item) => {
+          item.phonetics.forEach((phonetic) => {
+            // console.log(phonetic, sound);
+            if (phonetic.audio != "") sound = new Audio(phonetic.audio);
+          });
+        });
+        if (sound != null) {
           $("#audio-btn").css({ display: "block" });
         } else {
           $("#audio-btn").css({ display: "none" });
         }
-        // console.log(data);
+        console.log(data);
       });
+
     // .catch((err) => {
     //   alert("Something went wrong!", err);
     // });
