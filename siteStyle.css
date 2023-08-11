@@ -655,13 +655,31 @@ footer {
 }
 @media screen and (max-width: 420px) {
   nav {
-    font-size: 0.9rem;
+    /* font-size: 1.1rem; */
     line-height: 150%;
+    max-width: 100%;
+    gap: 1rem;
+  }
+  #opis-btn {
+    position: absolute;
+    max-width: fit-content;
+    top: 3.2rem;
+    left: 1.2rem;
+  }
+  .switchContainer {
+    position: absolute;
+    top: 2.8rem;
+    right: 1rem;
   }
   #ang_pl,
-  #przyciskZestaw {
+  #przyciskZestaw,
+  #max-btn {
     padding: 3px;
-    font-size: 0.9rem;
+    font-size: 1rem;
+  }
+  #max-btn {
+    margin-left: 0.4rem;
+    font-size: 0.7rem;
   }
   #ang_pl {
     line-height: 1;
@@ -686,20 +704,25 @@ footer {
   #top {
     width: 18rem;
   }
-  #ang_pl,
+  /* #ang_pl,
   #przyciskZestaw {
     font-size: 0.7rem;
-  }
+  } */
   nav {
-    font-size: 0.6rem;
-    font-weight: 700;
-    gap: 0.3rem;
+    /* font-size: 0.6rem; */
+    /* font-weight: 700; */
+    gap: 0.6rem;
   }
   #formLiczba {
     font-size: 1.2rem;
   }
-  #max-btn {
+  /* #max-btn {
     font-size: 0.7rem;
+  } */
+}
+@media screen and (max-width: 370px) {
+  #wybranyZestaw {
+    font-size: 0.8rem;
   }
 }
 @media screen and (max-width: 350px) {
@@ -744,5 +767,20 @@ footer {
   #podsumowanie,
   #top {
     max-width: 16rem;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  #wybranyZestaw {
+    font-size: 0.7rem;
+  }
+  #ang_pl,
+  #przyciskZestaw {
+    font-size: 0.7rem;
+  }
+  @media screen and (max-width: 300px) {
+    #wybranyZestaw {
+      font-size: 0.6rem;
+    }
   }
 }
