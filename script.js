@@ -44,6 +44,8 @@ $(document).ready(function () {
 
   let divSlowek = "#baza_slowek";
 
+  let znam_nieZnam_lock = true;
+
   $("#plansza").hide(); // domyślne ukrycie planszy i podsumowania
   $("#podsumowanie").hide();
   $("#zestawyLista").hide();
@@ -88,6 +90,11 @@ $(document).ready(function () {
     //przycisk karta
     if (slowkaNr != aktualnyNr && karta_blokada == false) {
       kartaObrot();
+      // console.log($(".karta").text());
+      if ($(".karta").text() != "START") {
+        znam_nieZnam_lock = false;
+        $(".przyciski_karty").css({ opacity: "1" });
+      }
       $(".karta").toggleClass("karta_anim");
 
       setTimeout(function () {
@@ -113,18 +120,26 @@ $(document).ready(function () {
 
   $("#znam").click(function () {
     //przycisk znam
-    znam = true;
-    nastepnaPara(znam);
-    cofnijLock = false;
-    cardFade();
+    if (znam_nieZnam_lock == false) {
+      znam = true;
+      nastepnaPara(znam);
+      cofnijLock = false;
+      cardFade();
+      znam_nieZnam_lock = true;
+      $(".przyciski_karty").css({ opacity: "0.5" });
+    }
   });
 
   $("#nie_znam").click(function () {
     //przycisk nie znam
-    znam = false;
-    nastepnaPara(znam);
-    cofnijLock = false;
-    cardFade();
+    if (znam_nieZnam_lock == false) {
+      znam = false;
+      nastepnaPara(znam);
+      cofnijLock = false;
+      cardFade();
+      znam_nieZnam_lock = true;
+      $(".przyciski_karty").css({ opacity: "0.5" });
+    }
   });
 
   $("#przyciskMinus").click(function () {
@@ -598,6 +613,7 @@ $(document).ready(function () {
   ///////////////////////  ANG WORDS API  //////////////////////////
   //////////////////////////////////////////////////////////////////
   let sound = null;
+  let example = [];
 
   const link = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 
@@ -628,7 +644,7 @@ $(document).ready(function () {
           item.meanings.forEach((meaning) => {
             if (meaning.synonyms.length) {
               synonym = synonym.concat(meaning.synonyms);
-              console.log(synonym);
+              // console.log(synonym);
             }
           });
         });
@@ -640,7 +656,8 @@ $(document).ready(function () {
         }
 
         /////////// EXAMPLE //////////////
-        let example = [];
+        example = [];
+        console.log(example);
 
         data.forEach((item) => {
           item.meanings.forEach((meaning) => {
@@ -653,7 +670,9 @@ $(document).ready(function () {
         });
 
         if (example.length) {
-          $("#opis").append(`<hr><b>Example: </b>${example[0]}`);
+          $("#opis").append(
+            `<span id='example'><hr><b>Example: </b>${example[0]}</span>`
+          );
         }
 
         // if (data[0].meanings[0].definitions[0].example != undefined) {
@@ -685,8 +704,16 @@ $(document).ready(function () {
   $("#audio-btn").click(function () {
     sound.play();
   });
-});
 
+  // $("#example").click(function () {
+  //   alert("click");
+  //   if (example.length > 1) {
+  //     $("#example").html(
+  //       `<span id='example'><hr><b id='exampleBtn'>Example: </b>${example[1]}</span>`
+  //     );
+  //   }
+  // });
+});
 /////////////////////////////////////////////////////////////////////////
 ///////////////////////   KOLORYSTYKA STRONY   //////////////////////////
 /////////////////////////////////////////////////////////////////////////

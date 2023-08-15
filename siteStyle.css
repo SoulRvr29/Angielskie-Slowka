@@ -517,6 +517,9 @@ div[title="zapisane słówka"] .zestaw {
   padding-right: 0.5rem;
   box-shadow: var(--button-shd);
 }
+.przyciski_karty {
+  opacity: 0.5;
+}
 #nie_znam {
   background-color: var(--unknown-bkg);
   border: 2px solid var(--unknown-brd);
@@ -586,6 +589,10 @@ div[title="zapisane słówka"] .zestaw {
   border: 1px solid var(--button-brd-hover);
   cursor: pointer;
 }
+
+/* #example:hover {
+  cursor: pointer;
+} */
 /************************* PODSUMOWANIE **************************/
 #podsumowanie {
   width: 22rem;
