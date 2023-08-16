@@ -614,6 +614,7 @@ $(document).ready(function () {
   //////////////////////////////////////////////////////////////////
   let sound = null;
   let example = [];
+  let exampleId = 0;
 
   const link = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 
@@ -634,7 +635,7 @@ $(document).ready(function () {
       })
       .then((data) => {
         ///////////// MEANING /////////////
-        $("#opis").html(
+        $("#meaning").html(
           `<b>Meaning: </b>${data[0].meanings[0].definitions[0].definition}`
         );
         //////////// SYNONYMS /////////////
@@ -649,16 +650,17 @@ $(document).ready(function () {
           });
         });
         if (synonym.length) {
-          $("#opis").append("<hr><b>Synonyms: </b>");
+          $('#synonym').html(`<hr><b>Synonym: </b>`);
           for (let i = 0; i < 5; i++) {
-            if (synonym[i] != undefined) $("#opis").append(`${synonym[i]}, `);
+            console.log(synonym[i])
+            if (synonym[i] != undefined) $("#synonym").append(`${synonym[i]}, `);
           }
         }
-
+        
         /////////// EXAMPLE //////////////
         example = [];
-        console.log(example);
-
+        // console.log(example);
+        
         data.forEach((item) => {
           item.meanings.forEach((meaning) => {
             meaning.definitions.forEach((definition) => {
@@ -668,11 +670,12 @@ $(document).ready(function () {
             });
           });
         });
-
+        
         if (example.length) {
-          $("#opis").append(
-            `<span id='example'><hr><b>Example: </b>${example[0]}</span>`
-          );
+          exampleId = 0;
+          if(example.length > 1) $("#example").html(`<hr><b>Example(${exampleId+1}/${example.length}): </b>${example[0]}`);
+          else $("#example").html(`<hr><b>Example: </b>${example[0]}`);
+          console.log(example);
         }
 
         // if (data[0].meanings[0].definitions[0].example != undefined) {
@@ -693,7 +696,7 @@ $(document).ready(function () {
         } else {
           $("#audio-btn").css({ display: "none" });
         }
-        console.log(data);
+        // console.log(data);
       });
 
     // .catch((err) => {
@@ -705,14 +708,17 @@ $(document).ready(function () {
     sound.play();
   });
 
-  // $("#example").click(function () {
-  //   alert("click");
-  //   if (example.length > 1) {
-  //     $("#example").html(
-  //       `<span id='example'><hr><b id='exampleBtn'>Example: </b>${example[1]}</span>`
-  //     );
-  //   }
-  // });
+  $("#example").click(function () {
+    // alert("click");
+    if (example.length > 1) {
+      exampleId++;
+
+      if (exampleId >= example.length) exampleId = 0;
+      $("#example").html(
+        `<hr><b>Example(${exampleId+1}/${example.length}): </b>${example[exampleId]}`
+      );
+    }
+  });
 });
 /////////////////////////////////////////////////////////////////////////
 ///////////////////////   KOLORYSTYKA STRONY   //////////////////////////

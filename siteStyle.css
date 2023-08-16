@@ -589,10 +589,18 @@ div[title="zapisane słówka"] .zestaw {
   border: 1px solid var(--button-brd-hover);
   cursor: pointer;
 }
-
-/* #example:hover {
-  cursor: pointer;
+/* #example,
+#meaning,
+#synonyms {
+  font-weight: bold;
+  color: #0a416e;
 } */
+#example:hover {
+  cursor: pointer;
+  background-color: var(--background-body);
+  /* text-decoration: underline; */
+  /* text-shadow: none; */
+}
 /************************* PODSUMOWANIE **************************/
 #podsumowanie {
   width: 22rem;
