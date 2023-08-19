@@ -94,9 +94,10 @@ $(document).ready(function () {
       if ($(".karta").text() != "START") {
         znam_nieZnam_lock = false;
         $(".przyciski_karty").css({ opacity: "1" });
+      } else {
+        opisBtn == true && apiDownload(los_slowkaAng[aktualnyNr]);
       }
       $(".karta").toggleClass("karta_anim");
-
       setTimeout(function () {
         $(".karta").toggleClass("karta_anim");
         karta_blokada = false;
@@ -432,7 +433,7 @@ $(document).ready(function () {
     if (strona_karty_akt == "ang-pl") {
       setTimeout(function () {
         $(".karta").text(los_slowkaAng[aktualnyNr]);
-        opisBtn == true && apiDownload(los_slowkaAng[aktualnyNr]);
+
         $(".karta").css({
           backgroundColor: "var(--card-ang-bkg)",
           border: "4px solid var(--card-ang-brd)",
@@ -457,6 +458,7 @@ $(document).ready(function () {
   ///////////////////////  ZNAM  /  NIE ZNAM  //////////////////////////
   //////////////////////////////////////////////////////////////////////
   function nastepnaPara(x) {
+    opisBtn == true && apiDownload(los_slowkaAng[aktualnyNr]);
     if (slowkaNr == aktualnyNr + 1) {
       if (x == true) kolor[aktualnyNr] = "var(--word-pl)"; // zieleń
       else kolor[aktualnyNr] = "var(--word-ang)"; // czerwień
@@ -614,7 +616,9 @@ $(document).ready(function () {
   //////////////////////////////////////////////////////////////////
   let sound = null;
   let example = [];
+  let meaningArr = [];
   let exampleId = 0;
+  let meaningId = 0;
 
   const link = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 
@@ -631,13 +635,39 @@ $(document).ready(function () {
           $("#opis-slowka h2").text("NO DESCRIPTION");
           $("#opis").css({ display: "none" });
           $("#audio-btn").css({ display: "none" });
+          return response.json();
         }
       })
       .then((data) => {
+        console.log(data);
         ///////////// MEANING /////////////
-        $("#meaning").html(
-          `<b>Meaning: </b>${data[0].meanings[0].definitions[0].definition}`
-        );
+        meaningArr = [];
+
+        data.forEach((item) => {
+          item.meanings.forEach((meaning) => {
+            meaning.definitions.forEach((definitions) => {
+              if (definitions.definition) {
+                meaningArr.push(definitions.definition);
+              }
+            });
+          });
+        });
+
+        if (meaningArr.length) {
+          meaningId = 0;
+          if (meaningArr.length > 1)
+            $("#meaning").html(
+              `<hr><b>Meaning(${meaningId + 1}/${meaningArr.length}): </b>${
+                meaningArr[0]
+              }`
+            );
+          else $("#meaning").html(`<hr><b>Meaning: </b>${meaningArr[0]}`);
+          // console.log(example);
+        }
+
+        // $("#meaning").html(
+        //   `<b>Meaning: </b>${data[0].meanings[0].definitions[0].definition}`
+        // );
         //////////// SYNONYMS /////////////
         let synonym = [];
 
@@ -650,17 +680,19 @@ $(document).ready(function () {
           });
         });
         if (synonym.length) {
-          $('#synonym').html(`<hr><b>Synonym: </b>`);
+          $("#synonym").html(`<hr><b>Synonym: </b>`);
           for (let i = 0; i < 5; i++) {
-            console.log(synonym[i])
-            if (synonym[i] != undefined) $("#synonym").append(`${synonym[i]}, `);
+            // console.log(synonym[i]);
+            if (synonym[i] != undefined) $("#synonym").append(synonym[i]);
+            if (i < synonym.length - 1) $("#synonym").append(", ");
+            if (i == synonym.length) $("#synonym").append(".");
           }
         }
-        
+
         /////////// EXAMPLE //////////////
         example = [];
         // console.log(example);
-        
+
         data.forEach((item) => {
           item.meanings.forEach((meaning) => {
             meaning.definitions.forEach((definition) => {
@@ -670,12 +702,17 @@ $(document).ready(function () {
             });
           });
         });
-        
+
         if (example.length) {
           exampleId = 0;
-          if(example.length > 1) $("#example").html(`<hr><b>Example(${exampleId+1}/${example.length}): </b>${example[0]}`);
+          if (example.length > 1)
+            $("#example").html(
+              `<hr><b>Example(${exampleId + 1}/${example.length}): </b>${
+                example[0]
+              }`
+            );
           else $("#example").html(`<hr><b>Example: </b>${example[0]}`);
-          console.log(example);
+          // console.log(example);
         }
 
         // if (data[0].meanings[0].definitions[0].example != undefined) {
@@ -715,7 +752,23 @@ $(document).ready(function () {
 
       if (exampleId >= example.length) exampleId = 0;
       $("#example").html(
-        `<hr><b>Example(${exampleId+1}/${example.length}): </b>${example[exampleId]}`
+        `<hr><b>Example(${exampleId + 1}/${example.length}): </b>${
+          example[exampleId]
+        }`
+      );
+    }
+  });
+
+  $("#meaning").click(function () {
+    // alert("click");
+    if (meaningArr.length > 1) {
+      meaningId++;
+
+      if (meaningId >= meaningArr.length) meaningId = 0;
+      $("#meaning").html(
+        `<hr><b>Meaning(${meaningId + 1}/${meaningArr.length}): </b>${
+          meaningArr[meaningId]
+        }`
       );
     }
   });
