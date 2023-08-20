@@ -64,7 +64,7 @@ $(document).ready(function () {
     //przycisk losowanie
     licznikPost = 0;
     $("#pasek").css("width", "0");
-    //$('#pasek').css('borderRadius', '4px 0px 0px 4px');
+
     slowkaNr = 0;
     aktualnyNr = 0; // reset
     strona_karty_akt = strona_karty_dom;
@@ -90,7 +90,7 @@ $(document).ready(function () {
     //przycisk karta
     if (slowkaNr != aktualnyNr && karta_blokada == false) {
       kartaObrot();
-      // console.log($(".karta").text());
+
       if ($(".karta").text() != "START") {
         znam_nieZnam_lock = false;
         $(".przyciski_karty").css({ opacity: "1" });
@@ -146,9 +146,6 @@ $(document).ready(function () {
   $("#przyciskMinus").click(function () {
     //przycisk minus
     if (formLiczba.value > 1) {
-      // $("#przyciskPlus")
-      //   .html(' <i class="icon-plus"></i> ')
-      //   .css({ fontSize: "20px", lineHeight: "160%" });
       formLiczba.value--;
       $("#divLiczbySlowek").text(formLiczba.value);
       localStorage.setItem("liczba slowek", formLiczba.value);
@@ -166,11 +163,6 @@ $(document).ready(function () {
       localStorage.setItem("liczba slowek", formLiczba.value);
       formWidth(formLiczba.value);
     }
-    // if (formLiczba.value == licznikBazy) {
-    //   $("#przyciskPlus")
-    //     .text("max")
-    //     .css({ fontSize: "12px", lineHeight: "240%" });
-    // }
     $("#plansza").slideUp();
     $("#podsumowanie").slideUp();
   });
@@ -219,10 +211,6 @@ $(document).ready(function () {
   $(".zestaw").click(function () {
     // przyciski listy zestawów
     wyborZestawu(this.title);
-    // if (formLiczba.value < licznikBazy)
-    //   $("#przyciskPlus")
-    //     .html(' <i class="icon-plus"></i> ')
-    //     .css({ fontSize: "20px", lineHeight: "160%" });
     $("#zestawSlowka").slideUp(0);
     if ($(document).width() < 800) $("#zestawyLista").slideUp();
     przyciskRozwin();
@@ -374,7 +362,6 @@ $(document).ready(function () {
         znakNr++;
       }
 
-      // sprawdzZnane(slowkaAng[slowkaNr]);
       ///////////////////// PL ////////////////////////
       slowkaPl[slowkaNr] = "";
       while (slowkaAll[znakNr] == "\n" || slowkaAll[znakNr] == "-") znakNr++;
@@ -458,7 +445,6 @@ $(document).ready(function () {
   ///////////////////////  ZNAM  /  NIE ZNAM  //////////////////////////
   //////////////////////////////////////////////////////////////////////
   function nastepnaPara(x) {
-    opisBtn == true && apiDownload(los_slowkaAng[aktualnyNr]);
     if (slowkaNr == aktualnyNr + 1) {
       if (x == true) kolor[aktualnyNr] = "var(--word-pl)"; // zieleń
       else kolor[aktualnyNr] = "var(--word-ang)"; // czerwień
@@ -467,6 +453,7 @@ $(document).ready(function () {
       if (x == true) {
         kolor[aktualnyNr] = "var(--word-pl)"; // zieleń
         aktualnyNr++;
+        opisBtn == true && apiDownload(los_slowkaAng[aktualnyNr]);
         strona_karty_akt = strona_karty_dom;
         kartaObrot();
         pasek_postepu();
@@ -477,11 +464,10 @@ $(document).ready(function () {
         los_slowkaPl[slowkaNr] = los_slowkaPl[aktualnyNr];
         slowkaNr++;
         aktualnyNr++;
-        // $('.karta').text(los_slowkaAng[aktualnyNr]);
-        // $('.karta').css({'backgroundColor': '#b53609','border': '4px solid #902600'});
+        opisBtn == true && apiDownload(los_slowkaAng[aktualnyNr]);
+
         strona_karty_akt = strona_karty_dom;
         kartaObrot();
-        // if(strona_karty_dom==false) kartaObrot(); // fix na szybkie mignięcie odpowiedzi
       }
     }
   }
@@ -507,12 +493,13 @@ $(document).ready(function () {
   /////////////////////////////////////////////////////////////////
   function cofnijRuch() {
     aktualnyNr--;
+    opisBtn == true && apiDownload(los_slowkaAng[aktualnyNr]);
     if (znam == false) slowkaNr--;
     if (znam == true) {
       licznikPost = licznikPost - 100 / formLiczba.value;
       $("#pasek").css("width", licznikPost + "%");
     }
-    // strona_karty_akt = !strona_karty_akt;
+
     strona_karty_akt == "ang-pl"
       ? (strona_karty_akt = "pl-ang")
       : (strona_karty_akt = "ang-pl");
@@ -604,7 +591,6 @@ $(document).ready(function () {
   }
 
   function dodajZapisaneDoHTML(lista) {
-    // console.log(JSON.parse(lista).flat().join("\n"));
     $("#baza_slowek").append(
       `<div id="zapisane" title="zapisane słówka"> ${JSON.parse(lista).join(
         "\n"
@@ -614,9 +600,11 @@ $(document).ready(function () {
   //////////////////////////////////////////////////////////////////
   ///////////////////////  ANG WORDS API  //////////////////////////
   //////////////////////////////////////////////////////////////////
-  let sound = null;
   let example = [];
+  let synonym = [];
   let meaningArr = [];
+  let audioArr = [];
+  let audioId = 0;
   let exampleId = 0;
   let meaningId = 0;
 
@@ -646,7 +634,7 @@ $(document).ready(function () {
         data.forEach((item) => {
           item.meanings.forEach((meaning) => {
             meaning.definitions.forEach((definitions) => {
-              if (definitions.definition) {
+              if (definitions.definition && meaningArr.length < 5) {
                 meaningArr.push(definitions.definition);
               }
             });
@@ -662,36 +650,31 @@ $(document).ready(function () {
               }`
             );
           else $("#meaning").html(`<hr><b>Meaning: </b>${meaningArr[0]}`);
-          // console.log(example);
         }
 
-        // $("#meaning").html(
-        //   `<b>Meaning: </b>${data[0].meanings[0].definitions[0].definition}`
-        // );
         //////////// SYNONYMS /////////////
-        let synonym = [];
+        synonym = [];
 
         data.forEach((item) => {
           item.meanings.forEach((meaning) => {
             if (meaning.synonyms.length) {
               synonym = synonym.concat(meaning.synonyms);
-              // console.log(synonym);
             }
           });
         });
         if (synonym.length) {
           $("#synonym").html(`<hr><b>Synonym: </b>`);
           for (let i = 0; i < 5; i++) {
-            // console.log(synonym[i]);
             if (synonym[i] != undefined) $("#synonym").append(synonym[i]);
             if (i < synonym.length - 1) $("#synonym").append(", ");
             if (i == synonym.length) $("#synonym").append(".");
           }
+        } else {
+          $("#synonym").html("");
         }
 
         /////////// EXAMPLE //////////////
         example = [];
-        // console.log(example);
 
         data.forEach((item) => {
           item.meanings.forEach((meaning) => {
@@ -712,41 +695,38 @@ $(document).ready(function () {
               }`
             );
           else $("#example").html(`<hr><b>Example: </b>${example[0]}`);
-          // console.log(example);
         }
 
-        // if (data[0].meanings[0].definitions[0].example != undefined) {
-        //   $("#opis").append(
-        //     `<hr><b>Example: </b>${data[0].meanings[0].definitions[0].example}`
-        //   );
-        // }
-
         /////////// SOUNDS //////////////
+        audioArr = [];
+
         data.forEach((item) => {
           item.phonetics.forEach((phonetic) => {
-            // console.log(phonetic, sound);
-            if (phonetic.audio != "") sound = new Audio(phonetic.audio);
+            if (phonetic.audio != "") {
+              audioArr.push(new Audio(phonetic.audio));
+            }
           });
         });
-        if (sound != null) {
+
+        if (audioArr.length) {
+          audioId = 0;
           $("#audio-btn").css({ display: "block" });
         } else {
           $("#audio-btn").css({ display: "none" });
         }
-        // console.log(data);
       });
-
-    // .catch((err) => {
-    //   alert("Something went wrong!", err);
-    // });
   };
-
+  /////////////////////////////////////////////////////////////////////////
   $("#audio-btn").click(function () {
-    sound.play();
+    if (audioArr.length) {
+      if (audioArr[audioId] == undefined) audioId++;
+      audioArr[audioId].play();
+      audioId++;
+      if (audioId >= audioArr.length) audioId = 0;
+    }
   });
 
   $("#example").click(function () {
-    // alert("click");
     if (example.length > 1) {
       exampleId++;
 
@@ -760,7 +740,6 @@ $(document).ready(function () {
   });
 
   $("#meaning").click(function () {
-    // alert("click");
     if (meaningArr.length > 1) {
       meaningId++;
 
