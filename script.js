@@ -233,6 +233,7 @@ $(document).ready(function () {
       $("#opis-btn").css({ opacity: "1" });
       opisBtn = true;
       localStorage.setItem("opis-btn", true);
+      opisBtn == true && apiDownload(los_slowkaAng[aktualnyNr]);
     } else {
       $("#opis-btn").css({ opacity: "0.6" });
       $("#opis-slowka").css({ display: "none" });
@@ -645,7 +646,7 @@ $(document).ready(function () {
           meaningId = 0;
           if (meaningArr.length > 1)
             $("#meaning").html(
-              `<hr><b>Meaning(${meaningId + 1}/${meaningArr.length}): </b>${
+              `<b>Meaning(${meaningId + 1}/${meaningArr.length}): </b>${
                 meaningArr[0]
               }`
             );
