@@ -628,7 +628,7 @@ $(document).ready(function () {
         }
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         ///////////// MEANING /////////////
         meaningArr = [];
 
@@ -688,6 +688,7 @@ $(document).ready(function () {
         });
 
         if (example.length) {
+          $("#example").html(`<hr><b>Example: </b>${example[0]}`);
           exampleId = 0;
           if (example.length > 1)
             $("#example").html(
@@ -695,9 +696,8 @@ $(document).ready(function () {
                 example[0]
               }`
             );
-          else $("#example").html(`<hr><b>Example: </b>${example[0]}`);
-        }
-
+        } else $("#example").html("");
+        console.log(example);
         /////////// SOUNDS //////////////
         audioArr = [];
 
