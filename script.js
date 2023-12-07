@@ -278,7 +278,7 @@ $(document).ready(function () {
     let tytulZestawu = "";
 
     $("#zestawyLista").append(
-      '<div class="zestaw_pack" title="wszystkie słówka"><div class="zestaw" title="wszystkie słówka">wszystkie słówka</div></div><hr>'
+      '<div class="zestaw_pack" title="wszystkie słówka"><div class="zestaw" title="wszystkie słówka">wszystkie słówka</div></div>'
     );
     $(".zestaw[title |= 'wszystkie słówka']").css(
       "backgroundColor",
@@ -592,7 +592,7 @@ $(document).ready(function () {
   }
 
   function dodajZapisaneDoHTML(lista) {
-    $("#baza_slowek").append(
+    $("#baza_slowek").prepend(
       `<div id="zapisane" title="zapisane słówka"> ${JSON.parse(lista).join(
         "\n"
       )}\n</div>`
