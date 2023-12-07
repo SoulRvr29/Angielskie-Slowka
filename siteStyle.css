@@ -117,6 +117,7 @@ body {
 }
 ::-webkit-scrollbar-thumb {
   background: var(--button-bkg);
+  border: 1px solid var(--background-body);
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--button-brd);
