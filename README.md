@@ -1,5 +1,5 @@
 # Angielskie-Slowka
-Aplikacja do nauki angielskich słówek metodą fiszek.
+Strona do nauki angielskich słówek metodą fiszek.
 
 # Link
 Link do strony: [https://soulrvr29.github.io/Angielskie-Slowka/](https://soulrvr29.github.io/Angielskie-Slowka/)
