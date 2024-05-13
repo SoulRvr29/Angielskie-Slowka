@@ -697,7 +697,7 @@ $(document).ready(function () {
               }`
             );
         } else $("#example").html("");
-        console.log(example);
+
         /////////// SOUNDS //////////////
         audioArr = [];
 
