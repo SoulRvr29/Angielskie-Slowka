@@ -7,7 +7,7 @@ $(document).ready(function () {
   let zapisaneSlowka = localStorage.getItem("zapisane slowka");
   if (zapisaneSlowka == null || zapisaneSlowka == "") {
     localStorage.setItem("zapisane slowka", JSON.stringify([]));
-    $("#baza_slowek").append(
+    $("#baza_slowek").prepend(
       `<div id="zapisane" title="zapisane słówka"> </div>`
     );
   } else {
@@ -28,7 +28,7 @@ $(document).ready(function () {
 
   let kolor = []; // lista kolorów
 
-  let strona_karty_dom = localStorage.getItem("ang-pl"); // domyślna strona karty
+  let strona_karty_dom = localStorage.getItem("ang-pl") || "ang-pl"; // domyślna strona karty
   if (strona_karty_dom == "pl-ang") $("#ang_pl").text("PL - ANG");
   else $("#ang_pl").text("ANG - PL");
   let strona_karty_akt = strona_karty_dom; // aktualna strona karty true-pl  false-ang
@@ -54,7 +54,7 @@ $(document).ready(function () {
   policzSlowka();
   wyborZestawu("wszystkie słówka");
   generujPrzyciskiZestaw();
-  formLiczba.value = localStorage.getItem("liczba slowek");
+  formLiczba.value = localStorage.getItem("liczba slowek") || 10;
   formWidth(formLiczba.value);
 
   ////////////////////////////////////////////////////////////////
@@ -756,7 +756,7 @@ $(document).ready(function () {
 /////////////////////////////////////////////////////////////////////////
 ///////////////////////   KOLORYSTYKA STRONY   //////////////////////////
 /////////////////////////////////////////////////////////////////////////
-let themeActual = localStorage.getItem("ang-pl-site");
+let themeActual = localStorage.getItem("ang-pl-site") || "1";
 
 setTheme(themeActual);
 
