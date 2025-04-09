@@ -329,7 +329,14 @@ nav {
   max-height: 50vh;
   overflow: auto;
 }
-
+#zestawyLista div{
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0;
+}
 #zestawSlowka {
   position: relative;
   border-top: var(--background-brd2);
